@@ -1,0 +1,12 @@
+/doc/
+/lib/
+/.crystal/
+/.shards/
+/.vscode/
+/tmp/
+.env
+.encryption_key
+.production.enc
+.DS_Store
+/bin/
+/node_modules
