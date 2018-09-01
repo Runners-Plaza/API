@@ -1,8 +1,12 @@
-# runners_plaza
+# Runner's Plaza API
 
 [![Amber Framework](https://img.shields.io/badge/using-amber_framework-orange.svg)](https://amberframework.org)
 
 This is a project written using [Amber](https://amberframework.org). Enjoy!
+
+## Todo
+
+- [ ] not just template in READMD.md
 
 ## Getting Started
 
@@ -39,7 +43,7 @@ crystal spec
 
 ## Contributing
 
-1. Fork it ( https://github.com/your-github-user/runners_plaza/fork )
+1. Fork it ( https://github.com/Runners-Plaza/API/fork )
 2. Create your feature branch ( `git checkout -b my-new-feature` )
 3. Commit your changes ( `git commit -am 'Add some feature'` )
 4. Push to the branch ( `git push origin my-new-feature` )
@@ -47,4 +51,4 @@ crystal spec
 
 ## Contributors
 
-- [your-github-user](https://github.com/your-github-user) Tatsiujin Chin - creator, maintainer
+- [c910335](https://github.com/c910335) Tatsiujin Chin - creator, maintainer
