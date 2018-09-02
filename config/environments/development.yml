@@ -21,7 +21,7 @@ process_count: 1
 # ssl_key_file:
 # ssl_cert_file:
 redis_url: "redis://localhost:6379"
-database_url: postgres://postgres:@localhost:5432/runners_plaza_development
+database_url: postgres://admin:password@db:5432/runners_plaza_development
 
 session:
   key: amber.session
@@ -32,5 +32,5 @@ smtp:
   enabled: false
 
 secrets:
-  description: Store your development secrets credentials and settings here.
-
+  fb_base_url: "https://graph.facebook.com"
+  fb_client_token: "Facebook Client Token"
