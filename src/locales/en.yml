@@ -7,3 +7,5 @@ errors:
       insufficient: "The request requires higher privileges than provided by the access token."
   user:
     denied: "You don't have permission."
+    not_found: "User with id %{id} not found."
+    update: "Could not update user!"

@@ -15,7 +15,11 @@ class User < Granite::Base
   timestamps
 
   def position
-    @position ||= Position.from_value(position_number)
+    @position ||= Position.from_value(position_number) if position_number
+  end
+
+  def position!
+    position.not_nil!
   end
 
   def position=(position : Position)
@@ -32,6 +36,6 @@ class User < Granite::Base
   end
 
   def set_defaults
-    self.position = Position::Member
+    self.position ||= Position::Member
   end
 end

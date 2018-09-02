@@ -1,7 +1,10 @@
 require "./initializers/**"
 require "amber"
+require "crinder"
 
+require "../src/handlers/**"
 require "../src/models/**"
+require "../src/renderers/**"
 require "../src/helpers/**"
 require "../src/controllers/application_controller"
 require "../src/controllers/**"
