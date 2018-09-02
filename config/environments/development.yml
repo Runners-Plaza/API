@@ -32,5 +32,5 @@ smtp:
   enabled: false
 
 secrets:
-  description: Store your development secrets credentials and settings here.
-
+  fb_base_url: "https://graph.facebook.com"
+  fb_client_token: "Facebook Client Token"

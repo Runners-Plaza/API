@@ -2,6 +2,7 @@ require "./initializers/**"
 
 require "amber"
 
+require "../src/helpers/**"
 require "../src/controllers/application_controller"
 require "../src/controllers/**"
 
@@ -128,4 +129,5 @@ Amber::Server.configure do |settings|
   # settings.logger = Amber::Environment::Logger.new(File.open("runners_plaza.log", "w"))
   #
   #
+  settings.secrets.try &.["fb_client_token"] = ENV["FB_CLIENT_TOKEN"] if ENV["FB_CLIENT_TOKEN"]?
 end
