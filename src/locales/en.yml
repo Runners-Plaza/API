@@ -5,3 +5,5 @@ errors:
       invalid: "The access token provided is expired, revoked or malformed."
     scope:
       insufficient: "The request requires higher privileges than provided by the access token."
+  user:
+    denied: "You don't have permission."
