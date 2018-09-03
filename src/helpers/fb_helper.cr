@@ -24,9 +24,9 @@ module FBHelper
   end
 
   def fb_authenticate! : TokenInfo::Data | Nil
-    token_missing!(REALM) || return unless token_string
-    token_invalid!(REALM) || return unless token_info? && token_data.is_valid
-    scope_insufficient!(REALM) || return unless (token_scopes & SCOPES).size == SCOPES.size
+    token_missing!(REALM) && return unless token_string
+    token_invalid!(REALM) && return unless token_info? && token_data.is_valid
+    scope_insufficient!(REALM) && return unless (token_scopes & SCOPES).size == SCOPES.size
     token_data
   end
 
