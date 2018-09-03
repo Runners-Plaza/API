@@ -2,12 +2,10 @@ FROM amberframework/amber:v0.9.0
 
 WORKDIR /app
 
-COPY shard.* /app/
-
-RUN shards install
-
 COPY . /app
+
+RUN shards build runners_plaza
 
 RUN rm -rf /app/node_modules
 
-CMD amber watch
+CMD amber db migrate seed && bin/runners_plaza
