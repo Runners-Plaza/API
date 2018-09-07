@@ -1,4 +1,4 @@
-# Runner's Plaza API
+# Runners' Plaza API
 
 [![Amber Framework](https://img.shields.io/badge/using-amber_framework-orange.svg)](https://amberframework.org)
 
