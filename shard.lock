@@ -84,6 +84,10 @@ shards:
     github: ysbaddaden/selenium-webdriver-crystal
     version: 0.4.0
 
+  shale:
+    github: c910335/shale
+    version: 0.1.1
+
   shell-table:
     github: luckyframework/shell-table.cr
     commit: 078a04ea58ead5203bb435a3b5fff448ddabaeea
