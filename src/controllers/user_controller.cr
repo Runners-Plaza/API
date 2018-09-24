@@ -4,8 +4,7 @@ class UserController < ApplicationController
   end
 
   def index
-    users = User.all
-    UserRenderer.render users.to_a
+    UserRenderer.render paginate User
   end
 
   def show

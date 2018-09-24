@@ -28,6 +28,10 @@ dependencies:
     github: c910335/crinder
     version: ~> 0.1.4
 
+  shale:
+    github: c910335/shale
+    version: ~> 0.1.1
+
   pg:
     github: will/crystal-pg
     version: ~> 0.15.0
