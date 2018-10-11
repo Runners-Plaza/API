@@ -8,10 +8,9 @@ class CurrentUserController < ApplicationController
   end
 
   def update
-    user = current_user
-    user.set_attributes(params.select(%w(email name)))
-    if user.valid? && user.save
-      UserRenderer.render user
+    current_user.set_attributes(params.select(%w(email name)))
+    if current_user.valid? && current_user.save
+      UserRenderer.render current_user
     else
       bad_request! t("errors.user.update")
     end

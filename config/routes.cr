@@ -6,7 +6,11 @@ Amber::Server.configure do
     plug JsonHandler.new
     plug Amber::Pipe::Logger.new
     plug Amber::Pipe::Session.new
-    plug Amber::Pipe::CORS.new(methods: %w(GET POST PUT PATCH DELETE), headers: %w(Accept Content-Type Authorization))
+    plug Amber::Pipe::CORS.new(
+      methods: %w(GET POST PUT PATCH DELETE),
+      headers: %w(Accept Content-Type Authorization),
+      expose_headers: %w(Link)
+    )
   end
 
   routes :api do

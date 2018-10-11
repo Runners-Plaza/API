@@ -86,7 +86,7 @@ shards:
 
   shale:
     github: c910335/shale
-    version: 0.1.1
+    version: 0.1.2
 
   shell-table:
     github: luckyframework/shell-table.cr
