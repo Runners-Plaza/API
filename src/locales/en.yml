@@ -9,3 +9,9 @@ errors:
     denied: "You don't have permission."
     not_found: "User with id %{id} not found."
     update: "Could not update user!"
+  runner:
+    not_found: "Runner with id %{id} not found."
+    create: "Could not create runner!"
+    update: "Could not update runner!"
+  current_runner:
+    not_found: "You are not a runner yet."
