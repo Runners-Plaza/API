@@ -6,14 +6,15 @@ services:
     image: runners_plaza
     command: amber watch
     environment:
-      DATABASE_URL: postgres://admin:password@db:5432/runners_plaza_development
+      - DATABASE_URL=postgres://admin:password@db:5432/runners_plaza_development
+      - FB_CLIENT_TOKEN
     ports:
       - 3000:3000
     links:
       - db
     volumes:
-    - .:/app
-    - nodes:/app/node_modules
+      - .:/app
+      - nodes:/app/node_modules
 
   migrate:
     build: .

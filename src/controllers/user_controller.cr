@@ -1,5 +1,8 @@
 class UserController < ApplicationController
+  property! user : User
+
   before_action do
+    only [:show, :update, :destroy] { set_user }
     only [:update, :destroy] { authenticate!(User::Position::Manager) }
   end
 
@@ -8,39 +11,31 @@ class UserController < ApplicationController
   end
 
   def show
-    if user = User.find params["id"]
-      UserRenderer.render user
-    else
-      not_found! t("errors.user.not_found", {id: params["id"]})
-    end
+    UserRenderer.render user
   end
 
   def update
-    if user = User.find(params["id"])
-      user.set_attributes(user_params.validate!)
-      user.position = params["position"]
-      if user.valid? && user.save
-        UserRenderer.render user
-      else
-        bad_request! t("errors.user.update")
-      end
+    user.set_attributes(user_params.validate!)
+    user.position = params["position"]
+    if user.valid? && user.save
+      UserRenderer.render user
     else
-      not_found! t("errors.user.not_found", {id: params["id"]})
+      bad_request! t("errors.user.update")
     end
   end
 
   def destroy
-    if user = User.find params["id"]
-      user.destroy
-      UserRenderer.render user
-    else
-      not_found! t("user.errors.not_found", {id: params["id"]})
-    end
+    user.destroy
+    UserRenderer.render user
   end
 
   def user_params
     params.validation do
       required(:position) { |f| !f.nil? && !!User::Position.parse?(f) }
     end
+  end
+
+  private def set_user
+    not_found! t("errors.user.not_found", {id: params["id"]}) unless @user = User.find(params["id"])
   end
 end

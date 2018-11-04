@@ -4,9 +4,9 @@ version: 0.1.0
 authors:
   - Tatsiujin Chin <c910335@gmail.com>
 
-crystal: 0.26.0
+crystal: 0.26.1
 
-license: UNLICENSED
+license: MIT License
 
 targets:
   runners_plaza:
@@ -22,7 +22,7 @@ dependencies:
 
   granite:
     github: amberframework/granite
-    version: ~> 0.13.0
+    version: ~> 0.13.1
 
   crinder:
     github: c910335/crinder
@@ -30,7 +30,7 @@ dependencies:
 
   shale:
     github: c910335/shale
-    version: ~> 0.1.1
+    version: ~> 0.1.2
 
   pg:
     github: will/crystal-pg

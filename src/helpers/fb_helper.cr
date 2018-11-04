@@ -9,7 +9,7 @@ module FBHelper
   @token_scopes : Array(String)?
   @fb_user : FBUser?
 
-  forward_missing_to FBHelper
+  delegate config, base_url, client_token, to: FBHelper
 
   def self.config(key : String) : String
     Amber.settings.secrets.try(&.[key]).not_nil!
@@ -23,7 +23,7 @@ module FBHelper
     @@client_token ||= config "fb_client_token"
   end
 
-  def fb_authenticate! : TokenInfo::Data | Nil
+  def fb_authenticate! : TokenInfo::Data?
     token_missing!(REALM) && return unless token_string
     token_invalid!(REALM) && return unless token_info? && token_data.is_valid
     scope_insufficient!(REALM) && return unless (token_scopes & SCOPES).size == SCOPES.size
@@ -34,7 +34,7 @@ module FBHelper
     fb_user?.not_nil!
   end
 
-  def fb_user? : FBUser | Nil
+  def fb_user? : FBUser?
     @fb_user ||= HTTP::Client.get("#{base_url}/v3.1/me?fields=name,email", headers: HTTP::Headers{"Authorization" => "Bearer #{token_string}"}) do |response|
       if response.success?
         FBUser.from_json(response.body_io)
