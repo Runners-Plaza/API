@@ -18,11 +18,11 @@ targets:
 dependencies:
   amber:
     github: amberframework/amber
-    version: ~> 0.9.0
+    version: ~> 0.11.3
 
   granite:
     github: amberframework/granite
-    version: ~> 0.13.1
+    version: ~> 0.15.2
 
   crinder:
     github: c910335/crinder
@@ -30,7 +30,7 @@ dependencies:
 
   shale:
     github: c910335/shale
-    version: ~> 0.1.2
+    version: ~> 0.2.0
 
   pg:
     github: will/crystal-pg
@@ -38,7 +38,7 @@ dependencies:
 
   citrine-i18n:
     github: amberframework/citrine-i18n
-    version: 0.3.2
+    version: ~> 0.3.2
 
 development_dependencies:
  garnet_spec:
