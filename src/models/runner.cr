@@ -22,6 +22,8 @@ class Runner < Granite::Base
   field approved_at : Time
   timestamps
 
+  @status : Status? = nil
+
   def set_other_attributes(user : User? = nil, birthday : String? = nil, group : String? = nil)
     user.try { |u| self.user = u }
     birthday.try { |b| @birthday = Time.parse(b, "%F", Granite.settings.default_timezone) }
