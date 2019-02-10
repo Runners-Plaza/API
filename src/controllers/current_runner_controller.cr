@@ -16,9 +16,8 @@ class CurrentRunnerController < ApplicationController
   def create
     return bad_request! t("errors.runner.create") if Runner.find_by(user_id: current_user.id)
 
-    self.runner = Runner.new(params.select(CREATE_PARAMS))
-    runner.user_id = current_user.id
-    runner.group = params["group"]?
+    @runner = Runner.new(params.select(CREATE_PARAMS))
+    runner.set_other_attributes(user: current_user, birthday: params["birthday"]?, group: params["group"]?)
     if runner.save
       CurrentRunnerRenderer.render runner
     else
@@ -30,7 +29,7 @@ class CurrentRunnerController < ApplicationController
     return forbidden!(t("errors.user.denied")) unless runner.status == Runner::Status::Approved
 
     runner.set_attributes(params.select(UPDATE_PARAMS))
-    runner.group = params["group"]?
+    runner.set_other_attributes(group: params["group"]?)
     if runner.save
       CurrentRunnerRenderer.render runner
     else

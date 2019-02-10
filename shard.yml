@@ -26,7 +26,7 @@ dependencies:
 
   crinder:
     github: c910335/crinder
-    version: ~> 0.1.4
+    branch: nilable-type
 
   shale:
     github: c910335/shale

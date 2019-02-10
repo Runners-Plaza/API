@@ -1,5 +1,5 @@
 class UserRenderer < Crinder::Base(User)
-  field id
+  field id : Int?
   field name : String
   field email : String
   field position : String
