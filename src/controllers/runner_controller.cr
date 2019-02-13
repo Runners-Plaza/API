@@ -3,7 +3,7 @@ class RunnerController < ApplicationController
 
   before_action do
     all { authenticate!(User::Position::Manager) }
-    only [:show, :update_status] { set_runner }
+    only [:show, :update_status, :error] { set_runner }
   end
 
   def index
@@ -22,6 +22,11 @@ class RunnerController < ApplicationController
     else
       bad_request! t("errors.user.update")
     end
+  end
+
+  def error
+    return not_found! t("errors.runner.error.not_found") unless runner.error
+    RunnerErrorRenderer.render t("runner.error.title"), runner.error!
   end
 
   private def set_runner

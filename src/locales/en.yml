@@ -13,5 +13,10 @@ errors:
     not_found: "Runner with id %{id} not found."
     create: "Could not create runner!"
     update: "Could not update runner!"
+    error:
+      not_found: "This runner is not rejected."
   current_runner:
     not_found: "You are not a runner yet."
+runner:
+  error:
+    title: "Runner: Rejected"

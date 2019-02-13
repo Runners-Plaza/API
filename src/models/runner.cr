@@ -11,6 +11,7 @@ class Runner < Granite::Base
 
   belongs_to approver : User
   belongs_to user : User
+  has_one error : RunnerError
   field name : String
   field alternative_name : String
   field english_name : String
@@ -42,7 +43,16 @@ class Runner < Granite::Base
   def update_status(status : String, reason : String? = nil)
     if Status.parse? status
       self.status = status
-      @approved_at = Time.now
+      @approved = if self.status == Status::Approved
+                    Time.now
+                  else
+                    nil
+                  end
+      if self.status == Status::Rejected
+        RunnerError.create(runner_id: @id, description: reason)
+      else
+        error.try &.destroy
+      end
       save
     end
   end

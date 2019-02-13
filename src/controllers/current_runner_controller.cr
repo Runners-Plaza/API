@@ -6,7 +6,7 @@ class CurrentRunnerController < ApplicationController
 
   before_action do
     all { authenticate!(User::Position::Member) }
-    only [:show, :update, :destroy] { set_runner }
+    only [:show, :update, :destroy, :error] { set_runner }
   end
 
   def show
@@ -41,6 +41,11 @@ class CurrentRunnerController < ApplicationController
     return forbidden!(t("errors.user.denied")) if runner.status == Runner::Status::Approved
     runner.destroy
     CurrentRunnerRenderer.render runner
+  end
+
+  def error
+    return not_found! t("errors.runner.error.not_found") unless runner.error
+    RunnerErrorRenderer.render t("runner.error.title"), runner.error!
   end
 
   private def set_runner
