@@ -8,7 +8,7 @@ CREATE TABLE runners (
   alternative_english_name VARCHAR,
   birthday DATE,
   phone VARCHAR,
-  group_name VARCHAR,
+  organization VARCHAR,
   status_number INT,
   approver_id BIGINT,
   approved_at TIMESTAMP,

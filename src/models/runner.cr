@@ -18,26 +18,17 @@ class Runner < Granite::Base
   field alternative_english_name : String
   field birthday : Time
   field phone : String
-  field group_name : String
+  field organization : String
   field status_number : Int32
   field approved_at : Time
   timestamps
 
   @status : Status? = nil
 
-  def set_other_attributes(user : User? = nil, birthday : String? = nil, group : String? = nil)
+  def set_other_attributes(user : User? = nil, birthday : String? = nil)
     user.try { |u| self.user = u }
     birthday.try { |b| @birthday = Time.parse(b, "%F", Granite.settings.default_timezone) }
-    group.try { |g| self.group = g }
     self
-  end
-
-  def group
-    group_name
-  end
-
-  def group=(group : String?)
-    @group_name = group
   end
 
   def update_status(status : String, reason : String? = nil)

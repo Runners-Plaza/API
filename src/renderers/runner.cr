@@ -6,7 +6,7 @@ class RunnerRenderer < Crinder::Base(Runner)
   field alternative_english_name : String?
   field birthday : String, value: ->{ object.birthday.try &.to_s("%F") }
   field phone : String
-  field group : String
+  field organization : String?
   field status : String
   field approver, with: UserRenderer, if: ->{ object.approver_id }
   field approved_at : String?

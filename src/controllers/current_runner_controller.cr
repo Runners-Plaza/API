@@ -1,5 +1,5 @@
 class CurrentRunnerController < ApplicationController
-  CREATE_PARAMS = %w(name alternative_name english_name alternative_english_name birthday phone group)
+  CREATE_PARAMS = %w(name alternative_name english_name alternative_english_name birthday phone organization)
   UPDATE_PARAMS = %w(phone group)
 
   property! runner : Runner
@@ -17,7 +17,7 @@ class CurrentRunnerController < ApplicationController
     return bad_request! t("errors.runner.create") if Runner.find_by(user_id: current_user.id)
 
     @runner = Runner.new(params.select(CREATE_PARAMS))
-    runner.set_other_attributes(user: current_user, birthday: params["birthday"]?, group: params["group"]?)
+    runner.set_other_attributes(user: current_user, birthday: params["birthday"]?)
     if runner.save
       CurrentRunnerRenderer.render runner
     else
@@ -29,7 +29,6 @@ class CurrentRunnerController < ApplicationController
     return forbidden!(t("errors.user.denied")) unless runner.status == Runner::Status::Approved
 
     runner.set_attributes(params.select(UPDATE_PARAMS))
-    runner.set_other_attributes(group: params["group"]?)
     if runner.save
       CurrentRunnerRenderer.render runner
     else
