@@ -2,16 +2,18 @@ class RunnerController < ApplicationController
   property! runner : Runner
 
   before_action do
-    all { authenticate!(User::Position::Manager) }
+    only [:update_status, :error] { authenticate!(User::Position::Manager) }
     only [:show, :update_status, :error] { set_runner }
   end
 
   def index
     status = Runner::Status.parse(params["status"]? || "pending")
+    authenticate!(User::Position::Manager).try { |e| return e } unless status == Runner::Status::Approved
     RunnerRenderer.render paginate Runner.where(status_number: status.value)
   end
 
   def show
+    authenticate!(User::Position::Manager).try { |e| return e } unless runner.status == Runner::Status::Approved
     RunnerRenderer.render runner
   end
 

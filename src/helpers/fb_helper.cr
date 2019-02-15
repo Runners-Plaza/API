@@ -23,11 +23,11 @@ module FBHelper
     @@client_token ||= config "fb_client_token"
   end
 
-  def fb_authenticate! : TokenInfo::Data?
-    token_missing!(REALM) && return unless token_string
-    token_invalid!(REALM) && return unless token_info? && token_data.is_valid
-    scope_insufficient!(REALM) && return unless (token_scopes & SCOPES).size == SCOPES.size
-    token_data
+  def fb_authenticate! : String?
+    return token_missing!(REALM) unless token_string
+    return token_invalid!(REALM) unless token_info? && token_data.is_valid
+    return scope_insufficient!(REALM) unless (token_scopes & SCOPES).size == SCOPES.size
+    nil
   end
 
   def fb_user : FBUser
