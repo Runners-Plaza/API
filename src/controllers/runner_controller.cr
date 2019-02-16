@@ -7,7 +7,7 @@ class RunnerController < ApplicationController
   end
 
   def index
-    status = Runner::Status.parse(params["status"]? || "pending")
+    status = Runner::Status.parse(params["status"]? || "approved")
     authenticate!(User::Position::Manager).try { |e| return e } unless status == Runner::Status::Approved
     RunnerRenderer.render paginate Runner.where(status_number: status.value)
   end
