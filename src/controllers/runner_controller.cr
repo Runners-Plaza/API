@@ -18,7 +18,7 @@ class RunnerController < ApplicationController
   end
 
   def update_status
-    if runner.update_status(params["status"], reason: params["reason"]?)
+    if runner.update_status(params["status"], approver: current_user, reason: params["reason"]?)
       response.status_code = 204
       nil
     else

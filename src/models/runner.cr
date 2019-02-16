@@ -31,7 +31,7 @@ class Runner < Granite::Base
     self
   end
 
-  def update_status(status : String, reason : String? = nil)
+  def update_status(status : String, approver : User, reason : String? = nil)
     if Status.parse? status
       self.status = status
       @approved = if self.status == Status::Approved
@@ -44,6 +44,7 @@ class Runner < Granite::Base
       else
         error.try &.destroy
       end
+      self.approver = approver
       save
     end
   end
@@ -67,6 +68,10 @@ class Runner < Granite::Base
 
   def status=(name : String)
     self.status = Status.parse(name)
+  end
+
+  def approver?
+    @approver_id.try { self.approver }
   end
 
   def set_defaults
