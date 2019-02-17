@@ -10,7 +10,7 @@ class CurrentRunnerController < ApplicationController
   end
 
   def show
-    CurrentRunnerRenderer.render runner
+    RunnerRenderer.render runner
   end
 
   def create
@@ -19,7 +19,7 @@ class CurrentRunnerController < ApplicationController
     @runner = Runner.new(params.select(CREATE_PARAMS))
     runner.set_other_attributes(user: current_user, birthday: params["birthday"]?)
     if runner.save
-      CurrentRunnerRenderer.render runner
+      RunnerRenderer.render runner
     else
       bad_request! t("errors.runner.create")
     end
@@ -30,7 +30,7 @@ class CurrentRunnerController < ApplicationController
 
     runner.set_attributes(params.select(UPDATE_PARAMS))
     if runner.save
-      CurrentRunnerRenderer.render runner
+      RunnerRenderer.render runner
     else
       bad_request! t("errors.runner.update")
     end
@@ -39,7 +39,7 @@ class CurrentRunnerController < ApplicationController
   def destroy
     return forbidden!(t("errors.user.denied")) if runner.status == Runner::Status::Approved
     runner.destroy
-    CurrentRunnerRenderer.render runner
+    RunnerRenderer.render runner
   end
 
   def error

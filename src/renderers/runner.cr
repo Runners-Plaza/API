@@ -8,7 +8,6 @@ class RunnerRenderer < Crinder::Base(Runner)
   field phone : String
   field organization : String?
   field status : String
-  field approver?, as: approver, with: UserRenderer
   field approved_at : String?
   field created_at : String
   field updated_at : String
