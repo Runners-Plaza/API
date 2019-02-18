@@ -14,6 +14,8 @@ class User < Granite::Base
   field position_number : Int32
   timestamps
 
+  @position : Position? = nil
+
   def position
     @position ||= Position.from_value(position_number) if position_number
   end

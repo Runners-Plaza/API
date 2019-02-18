@@ -18,5 +18,15 @@ Amber::Server.configure do
     get "/user", CurrentUserController, :show
     put "/user", CurrentUserController, :update
     patch "/user", CurrentUserController, :update
+    resources "/runners", RunnerController, only: [:index, :show]
+    put "/runners/:id/status", RunnerController, :update_status
+    patch "/runners/:id/status", RunnerController, :update_status
+    get "/runners/:id/error", RunnerController, :error
+    post "/runner", CurrentRunnerController, :create
+    get "/runner", CurrentRunnerController, :show
+    put "/runner", CurrentRunnerController, :update
+    patch "/runner", CurrentRunnerController, :update
+    delete "/runner", CurrentRunnerController, :destroy
+    get "/runner/error", CurrentRunnerController, :error
   end
 end

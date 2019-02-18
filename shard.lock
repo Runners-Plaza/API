@@ -26,7 +26,7 @@ shards:
 
   crinder:
     github: c910335/crinder
-    version: 0.1.4
+    commit: d0978773182ec60de1905c6dd807442a338e0262
 
   db:
     github: crystal-lang/crystal-db
