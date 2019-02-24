@@ -26,7 +26,7 @@ class CurrentRunnerController < ApplicationController
   end
 
   def update
-    return forbidden!(t("errors.user.denied")) unless runner.status == Runner::Status::Approved
+    return forbidden!(t("errors.user.denied")) unless runner.status!.approved?
 
     runner.set_attributes(params.select(UPDATE_PARAMS))
     if runner.save
@@ -37,7 +37,7 @@ class CurrentRunnerController < ApplicationController
   end
 
   def destroy
-    return forbidden!(t("errors.user.denied")) if runner.status == Runner::Status::Approved
+    return forbidden!(t("errors.user.denied")) if runner.status!.approved?
     runner.destroy
     RunnerRenderer.render runner, approver?: current_user.position!.manager?
   end
