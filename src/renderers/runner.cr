@@ -4,7 +4,7 @@ class RunnerRenderer < Crinder::Base(Runner)
   field alternative_name : String?
   field english_name : String?
   field alternative_english_name : String?
-  field birthday : String, value: ->{ object.birthday.try &.to_s("%F") }
+  field birthday : String, value: ->{ birthday.try &.to_s("%F") }
   field phone : String
   field organization : String?
   field status : String
