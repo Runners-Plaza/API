@@ -28,5 +28,6 @@ Amber::Server.configure do
     patch "/runner", CurrentRunnerController, :update
     delete "/runner", CurrentRunnerController, :destroy
     get "/runner/error", CurrentRunnerController, :error
+    resources "/events", EventController, except: [:new, :edit]
   end
 end
