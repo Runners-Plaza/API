@@ -7,18 +7,18 @@ class UserController < ApplicationController
   end
 
   def index
-    UserRenderer.render paginate User
+    UserRenderer.render paginate(User), fb_id?: current_user?.try &.position!.manager?
   end
 
   def show
-    UserRenderer.render user
+    UserRenderer.render user, fb_id?: current_user?.try &.position!.manager?
   end
 
   def update
     user.set_attributes(user_params.validate!)
     user.position = params["position"]
     if user.valid? && user.save
-      UserRenderer.render user
+      DetailedUserRenderer.render user
     else
       bad_request! t("errors.user.update")
     end
@@ -26,7 +26,7 @@ class UserController < ApplicationController
 
   def destroy
     user.destroy
-    UserRenderer.render user
+    DetailedUserRenderer.render user
   end
 
   def runner

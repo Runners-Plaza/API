@@ -5,6 +5,6 @@ class RunnerErrorRenderer < Crinder::Base(RunnerError)
   field description : String
 
   def self.render(@@title, error : RunnerError)
-    self.render(error)
+    render(error)
   end
 end
