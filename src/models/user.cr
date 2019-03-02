@@ -11,31 +11,8 @@ class User < Granite::Base
   field fb_id : String
   field email : String
   field name : String
-  field position_number : Int32
+  enum_field position : Position
   timestamps
-
-  @position : Position? = nil
-
-  def position
-    @position ||= Position.from_value(position_number) if position_number
-  end
-
-  def position!
-    position.not_nil!
-  end
-
-  def position=(position : Position)
-    @position = position
-    @position_number = position.value
-  end
-
-  def position=(number : Int)
-    self.position = Position.from_value(number)
-  end
-
-  def position=(name : String)
-    self.position = Position.parse(name)
-  end
 
   def set_defaults
     self.position ||= Position::Member

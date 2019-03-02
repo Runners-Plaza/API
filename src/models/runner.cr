@@ -19,11 +19,9 @@ class Runner < Granite::Base
   field birthday : Time
   field phone : String
   field organization : String
-  field status_number : Int32
+  enum_field status : Status
   field approved_at : Time
   timestamps
-
-  @status : Status? = nil
 
   def set_other_attributes(user : User? = nil, birthday : String? = nil)
     user.try { |u| self.user = u }
@@ -47,27 +45,6 @@ class Runner < Granite::Base
       self.approver = approver
       save
     end
-  end
-
-  def status
-    @status ||= Status.from_value(status_number) if status_number
-  end
-
-  def status!
-    status.not_nil!
-  end
-
-  def status=(status : Status)
-    @status = status
-    @status_number = status.value
-  end
-
-  def status=(number : Int)
-    self.status = Status.from_value(number)
-  end
-
-  def status=(name : String)
-    self.status = Status.parse(name)
   end
 
   def approver?
