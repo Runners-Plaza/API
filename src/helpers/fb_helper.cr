@@ -47,18 +47,24 @@ module FBHelper
   end
 
   def token_data : TokenInfo::Data
-    token_info?.not_nil!.data
+    token_data?.not_nil!
   end
 
-  def token_info? : TokenInfo | Nil
-    @token_info ||= HTTP::Client.get("#{base_url}/debug_token?input_token=#{token_string}", headers: HTTP::Headers{"Authorization" => "Bearer #{client_token}"}) do |response|
-      if response.success?
-        TokenInfo.from_json(response.body_io)
-      end
-    end
+  def token_data? : TokenInfo::Data?
+    token_info?.try &.data
   end
 
-  def token_string : String | Nil
+  def token_info? : TokenInfo?
+    @token_info ||= if token_string
+                      HTTP::Client.get("#{base_url}/debug_token?input_token=#{token_string}", headers: HTTP::Headers{"Authorization" => "Bearer #{client_token}"}) do |response|
+                        if response.success?
+                          TokenInfo.from_json(response.body_io)
+                        end
+                      end
+                    end
+  end
+
+  def token_string : String?
     @token_string ||= (authorization = request.headers["Authorization"]?) && authorization[/Bearer (.*)$/, 1]?
   end
 

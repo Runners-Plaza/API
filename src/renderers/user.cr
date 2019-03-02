@@ -1,4 +1,4 @@
-class UserRenderer < Crinder::Base(User)
+class UserRenderer < Crinder::Base(User?)
   field id : Int?
   field name : String
   field email : String
