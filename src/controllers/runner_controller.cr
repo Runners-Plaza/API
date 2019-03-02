@@ -9,12 +9,14 @@ class RunnerController < ApplicationController
   def index
     status = Runner::Status.parse(params["status"]? || "approved")
     authenticate!(User::Position::Manager).try { |e| return e } unless status.approved?
-    RunnerRenderer.render paginate(Runner.where(status_number: status.value)), approver?: current_user?.try &.position!.manager?
+    users? = current_user?.try &.position!.manager?
+    RunnerRenderer.render paginate(Runner.where(status_number: status.value)), user?: users?, approver?: users?
   end
 
   def show
     authenticate!(User::Position::Manager).try { |e| return e } unless runner.status!.approved?
-    RunnerRenderer.render runner, approver?: current_user?.try &.position!.manager?
+    users? = current_user?.try &.position!.manager?
+    RunnerRenderer.render runner, user?: users?, approver?: users?
   end
 
   def update_status
