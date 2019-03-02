@@ -8,6 +8,7 @@ class User < Granite::Base
   table_name users
   before_create set_defaults
 
+  has_one runner : Runner
   field fb_id : String
   field email : String
   field name : String

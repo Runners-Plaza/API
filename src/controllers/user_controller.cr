@@ -2,8 +2,8 @@ class UserController < ApplicationController
   property! user : User
 
   before_action do
-    only [:show, :update, :destroy] { set_user }
-    only [:update, :destroy] { authenticate!(User::Position::Manager) }
+    only [:show, :update, :destroy, :runner] { set_user }
+    only [:update, :destroy, :runner] { authenticate!(User::Position::Manager) }
   end
 
   def index
@@ -27,6 +27,11 @@ class UserController < ApplicationController
   def destroy
     user.destroy
     UserRenderer.render user
+  end
+
+  def runner
+    not_found! t("errors.user.runner.not_found") unless user.runner
+    RunnerRenderer.render user.runner!, user?: false, approver?: true
   end
 
   def user_params
