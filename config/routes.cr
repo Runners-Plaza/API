@@ -15,6 +15,7 @@ Amber::Server.configure do
 
   routes :api do
     resources "/users", UserController, except: [:new, :edit, :create]
+    get "/users/:id/runner", UserController, :runner
     get "/user", CurrentUserController, :show
     put "/user", CurrentUserController, :update
     patch "/user", CurrentUserController, :update

@@ -2,23 +2,23 @@ class UserController < ApplicationController
   property! user : User
 
   before_action do
-    only [:show, :update, :destroy] { set_user }
-    only [:update, :destroy] { authenticate!(User::Position::Manager) }
+    only [:show, :update, :destroy, :runner] { set_user }
+    only [:update, :destroy, :runner] { authenticate!(User::Position::Manager) }
   end
 
   def index
-    UserRenderer.render paginate User
+    UserRenderer.render paginate(User), fb_id?: current_user?.try &.position!.manager?
   end
 
   def show
-    UserRenderer.render user
+    UserRenderer.render user, fb_id?: current_user?.try &.position!.manager?
   end
 
   def update
     user.set_attributes(user_params.validate!)
     user.position = params["position"]
     if user.valid? && user.save
-      UserRenderer.render user
+      DetailedUserRenderer.render user
     else
       bad_request! t("errors.user.update")
     end
@@ -26,7 +26,12 @@ class UserController < ApplicationController
 
   def destroy
     user.destroy
-    UserRenderer.render user
+    DetailedUserRenderer.render user
+  end
+
+  def runner
+    not_found! t("errors.user.runner.not_found") unless user.runner
+    RunnerRenderer.render user.runner!, user?: false, approver?: true
   end
 
   def user_params
