@@ -2,7 +2,7 @@ version: 1.0
 shards:
   amber:
     github: amberframework/amber
-    version: 0.11.3
+    version: 0.27.0
 
   amber_router:
     github: amberframework/amber-router
@@ -35,10 +35,6 @@ shards:
   exception_page:
     github: crystal-loot/exception_page
     version: 0.1.2
-
-  garnet_spec:
-    github: amberframework/garnet-spec
-    version: 0.2.1
 
   granite:
     github: amberframework/granite
@@ -83,10 +79,6 @@ shards:
   redis:
     github: stefanwille/crystal-redis
     version: 2.0.0
-
-  selenium:
-    github: ysbaddaden/selenium-webdriver-crystal
-    version: 0.4.0
 
   shale:
     github: c910335/shale
