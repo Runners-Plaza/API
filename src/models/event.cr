@@ -21,6 +21,8 @@ class Event < Granite::Base
   adapter pg
   table_name events
 
+  has_many distances : Distance
+
   primary id : Int64
   field name : String
   field english_name : String

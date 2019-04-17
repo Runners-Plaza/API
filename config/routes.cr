@@ -30,5 +30,8 @@ Amber::Server.configure do
     delete "/runner", CurrentRunnerController, :destroy
     get "/runner/error", CurrentRunnerController, :error
     resources "/events", EventController, except: [:new, :edit]
+    get "/events/:id/distances", DistanceController, :index
+    post "/events/:id/distances", DistanceController, :create
+    resources "/distances", DistanceController, only: [:show, :update, :destroy]
   end
 end
