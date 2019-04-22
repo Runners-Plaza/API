@@ -12,6 +12,7 @@ class Runner < Granite::Base
   belongs_to approver : User
   belongs_to user : User
   has_one error : RunnerError
+  has_many records
 
   field name : String
   field alternative_name : String
@@ -54,7 +55,5 @@ class Runner < Granite::Base
 
   def set_defaults
     self.status ||= Status::Pending
-    pp! status
-    pp! status_number
   end
 end

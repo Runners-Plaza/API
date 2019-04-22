@@ -33,5 +33,9 @@ Amber::Server.configure do
     get "/events/:id/distances", DistanceController, :index
     post "/events/:id/distances", DistanceController, :create
     resources "/distances", DistanceController, only: [:show, :update, :destroy]
+    resources "/records", RecordController, only: [:index, :show]
+    get "/runner/records", CurrentRecordController, :index
+    post "/distances/:id/records", CurrentRecordController, :create
+    resources "/records", CurrentRecordController, only: [:update, :destroy]
   end
 end
