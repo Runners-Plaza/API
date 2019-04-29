@@ -12,6 +12,7 @@ class Runner < Granite::Base
   belongs_to approver : User
   belongs_to user : User
   has_one error : RunnerError
+
   field name : String
   field alternative_name : String
   field english_name : String

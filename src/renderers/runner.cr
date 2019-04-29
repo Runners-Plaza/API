@@ -3,7 +3,7 @@ class RunnerRenderer < Crinder::Base(Runner)
   class_getter? user : Bool? = false
 
   field id : Int?
-  field user, with: DetailedUserRenderer, value: -> { object.user_id.try { user } }, if: user?
+  field user, with: DetailedUserRenderer, value: ->{ object.user_id.try { user } }, if: user?
   field name : String
   field alternative_name : String?
   field english_name : String?

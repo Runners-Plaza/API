@@ -18,7 +18,7 @@ targets:
 dependencies:
   amber:
     github: amberframework/amber
-    version: ~> 0.11.3
+    version: ~> 0.27.0
 
   granite:
     github: amberframework/granite
@@ -32,15 +32,6 @@ dependencies:
     github: c910335/shale
     version: ~> 0.2.0
 
-  pg:
-    github: will/crystal-pg
-    version: ~> 0.15.0
-
   citrine-i18n:
     github: amberframework/citrine-i18n
     version: ~> 0.3.2
-
-development_dependencies:
- garnet_spec:
-   github: amberframework/garnet-spec
-   version: ~> 0.2.1
