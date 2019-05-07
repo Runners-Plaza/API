@@ -27,6 +27,11 @@ errors:
     not_found: "Record with id %{id} not found."
     create: "Could not create record!"
     update: "Could not update record!"
+    error:
+      not_found: "This record is not rejected."
 runner:
   error:
     title: "Runner: Rejected"
+record:
+  error:
+    title: "Record: Rejected"

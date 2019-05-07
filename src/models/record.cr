@@ -8,10 +8,12 @@ class Record < Granite::Base
   adapter pg
   table_name records
   before_create set_defaults
+  before_destroy clear_error
 
   belongs_to runner
   belongs_to distance
   belongs_to approver : User
+  has_one error : RecordError
 
   primary id : Int64
   field bib_number : String
@@ -33,7 +35,29 @@ class Record < Granite::Base
     approver.try { |a| self.approver = a }
   end
 
+  def update_status(status : String, approver : User, reason : String? = nil)
+    if Status.parse? status
+      self.status = status
+      @approved_at = if self.status == Status::Approved
+                       Time.now
+                     else
+                       nil
+                     end
+      if self.status == Status::Rejected
+        RecordError.create(record_id: @id, description: reason)
+      else
+        clear_error
+      end
+      self.approver = approver
+      save
+    end
+  end
+
   def set_defaults
     self.status ||= Status::Pending
+  end
+
+  def clear_error
+    error.try &.destroy
   end
 end

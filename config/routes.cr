@@ -37,5 +37,8 @@ Amber::Server.configure do
     get "/runner/records", CurrentRecordController, :index
     post "/distances/:id/records", CurrentRecordController, :create
     resources "/records", CurrentRecordController, only: [:update, :destroy]
+    put "/records/:id/status", RecordController, :update_status
+    patch "/records/:id/status", RecordController, :update_status
+    get "/records/:id/error", RecordController, :error
   end
 end
