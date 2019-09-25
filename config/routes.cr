@@ -40,5 +40,7 @@ Amber::Server.configure do
     put "/records/:id/status", RecordController, :update_status
     patch "/records/:id/status", RecordController, :update_status
     get "/records/:id/error", RecordController, :error
+    post "/records/:id/certificate", CertificateController, :create
+    get "/records/:id/certificate", CertificateController, :show
   end
 end

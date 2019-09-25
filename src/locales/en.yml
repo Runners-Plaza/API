@@ -29,6 +29,9 @@ errors:
     update: "Could not update record!"
     error:
       not_found: "This record is not rejected."
+  certificate:
+    create: "Could not create certificate!"
+    not_found: "This record does't have certificate."
 runner:
   error:
     title: "Runner: Rejected"

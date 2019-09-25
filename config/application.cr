@@ -1,5 +1,6 @@
 require "amber"
 require "crinder"
+require "file_utils"
 require "./initializers/**"
 require "../src/handlers/**"
 require "../src/models/**"

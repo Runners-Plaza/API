@@ -8,12 +8,13 @@ class Record < Granite::Base
   adapter pg
   table_name records
   before_create set_defaults
-  before_destroy clear_error
+  before_destroy clear_error, clear_certificate
 
   belongs_to runner
   belongs_to distance
   belongs_to approver : User
   has_one error : RecordError
+  has_one certificate : Certificate
 
   primary id : Int64
   field bib_number : String
@@ -59,5 +60,9 @@ class Record < Granite::Base
 
   def clear_error
     error.try &.destroy
+  end
+
+  def clear_certificate
+    certificate.try &.destroy
   end
 end

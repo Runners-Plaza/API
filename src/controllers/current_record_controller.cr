@@ -10,7 +10,7 @@ class CurrentRecordController < ApplicationController
     all { authenticate!(User::Position::Member) }
     only [:create] { set_distance }
     only [:index, :create] { set_runner }
-    only [:update, :destroy] { set_runner; set_record }
+    only [:update, :destroy] { set_runner || set_record }
   end
 
   def index
