@@ -4,7 +4,7 @@ version: 0.1.0
 authors:
   - Tatsiujin Chin <c910335@gmail.com>
 
-crystal: 0.27.2
+crystal: 0.30.1
 
 license: MIT License
 
@@ -18,11 +18,11 @@ targets:
 dependencies:
   amber:
     github: amberframework/amber
-    version: ~> 0.27.0
+    version: ~> 0.30.1
 
   granite:
     github: amberframework/granite
-    version: ~> 0.15.2
+    version: ~> 0.17.2
 
   crinder:
     github: c910335/crinder
@@ -30,8 +30,8 @@ dependencies:
 
   shale:
     github: c910335/shale
-    version: ~> 0.2.0
+    version: ~> 0.2.1
 
   citrine-i18n:
     github: amberframework/citrine-i18n
-    version: ~> 0.3.2
+    version: ~> 0.4.0
