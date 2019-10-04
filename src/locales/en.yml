@@ -23,6 +23,18 @@ errors:
     not_found: "Event with id %{id} not found."
     create: "Could not create event!"
     update: "Could not update event!"
+  record:
+    not_found: "Record with id %{id} not found."
+    create: "Could not create record!"
+    update: "Could not update record!"
+    error:
+      not_found: "This record is not rejected."
+  certificate:
+    create: "Could not create certificate!"
+    not_found: "This record does't have certificate."
 runner:
   error:
     title: "Runner: Rejected"
+record:
+  error:
+    title: "Record: Rejected"

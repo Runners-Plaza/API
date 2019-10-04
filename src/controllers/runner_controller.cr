@@ -24,7 +24,7 @@ class RunnerController < ApplicationController
       response.status_code = 204
       nil
     else
-      bad_request! t("errors.user.update")
+      bad_request! t("errors.runner.update")
     end
   end
 

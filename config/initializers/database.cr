@@ -35,4 +35,22 @@ class Granite::Base
       end
     end
   end
+
+  macro alias_field(a, b)
+    {%
+      a = a.id
+      b = b.id
+    %}
+    def {{a}}
+      {{b}}
+    end
+
+    def {{a}}!
+      {{b}}!
+    end
+
+    def {{a}}=(value)
+      self.{{b}} = value
+    end
+  end
 end
