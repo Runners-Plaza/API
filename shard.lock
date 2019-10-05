@@ -8,6 +8,10 @@ shards:
     github: amberframework/amber-router
     version: 0.3.0
 
+  ameba:
+    github: crystal-ameba/ameba
+    version: 0.10.1
+
   callback:
     github: drujensen/callback
     version: 0.7.1

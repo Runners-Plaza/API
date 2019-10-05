@@ -35,3 +35,8 @@ dependencies:
   citrine-i18n:
     github: amberframework/citrine-i18n
     version: ~> 0.4.0
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 0.10.1
