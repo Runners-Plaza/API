@@ -1,10 +1,10 @@
 class Certificate < Granite::Base
-  adapter pg
-  table_name certificates
+  connection pg
+  table certificates
 
   belongs_to record
 
-  primary id : Int64
-  field type : String
+  column id : Int64, primary: true
+  column type : String
   timestamps
 end

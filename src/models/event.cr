@@ -18,33 +18,36 @@ class Event < Granite::Base
     Other
   end
 
-  adapter pg
-  table_name events
+  connection pg
+  table events
 
   has_many distances : Distance
 
-  primary id : Int64
-  field name : String
-  field english_name : String
-  field organizer : String
-  field english_organizer : String
-  field location : String
-  field english_location : String
-  enum_field level : Level
-  enum_field region : Region
-  field url : String
-  field start_at : Time
-  field sign_start_at : Time
-  field sign_end_at : Time
-  field iaaf : Bool
-  field aims : Bool
-  field measured : Bool
-  field recordable : Bool
+  column id : Int64, primary: true
+  column name : String
+  column english_name : String?
+  column organizer : String
+  column english_organizer : String?
+  column location : String
+  column english_location : String?
+  enum_column level : Level
+  enum_column region : Region
+  column url : String?
+  column start_at : Time
+  column sign_start_at : Time?
+  column sign_end_at : Time?
+  column iaaf : Bool
+  column aims : Bool
+  column measured : Bool
+  column recordable : Bool
   timestamps
 
-  def set_other_attributes(level = nil, region = nil)
-    level.try { |l| self.level = l }
-    region.try { |r| self.region = r }
+  def set_other_attributes(args)
+    self.level = args["level"] if args["level"]?
+    self.region = args["region"] if args["region"]?
+    @start_at = Time.parse(args["start_at"], "%F %T", Granite.settings.default_timezone) if args["start_at"]?
+    @sign_start_at = Time.parse(args["sign_start_at"], "%F %T", Granite.settings.default_timezone) if args["sign_start_at"]?
+    @sign_end_at = Time.parse(args["sign_end_at"], "%F %T", Granite.settings.default_timezone) if args["sign_end_at"]?
     self
   end
 end

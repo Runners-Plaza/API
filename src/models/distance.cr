@@ -1,14 +1,14 @@
 class Distance < Granite::Base
-  adapter pg
-  table_name distances
+  connection pg
+  table distances
 
   belongs_to event
 
-  primary id : Int64
-  field name : String
-  field distance : Int32
-  field cost : Int32
-  field time_limit : Int32
-  field runner_limit : Int32
+  column id : Int64, primary: true
+  column name : String
+  column distance : Int32?
+  column cost : Int32?
+  column time_limit : Int32?
+  column runner_limit : Int32?
   timestamps
 end

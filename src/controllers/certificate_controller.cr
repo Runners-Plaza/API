@@ -9,7 +9,7 @@ class CertificateController < ApplicationController
   end
 
   def create
-    return forbidden!(t("errors.user.denied")) unless record.status!.pending?
+    return forbidden!(t("errors.user.denied")) unless record.status.pending?
 
     image = params.files["certificate"]
     if record.certificate.nil? && (filename = image.filename) && (md = filename.match /\.(gif|jpg|jpeg|png)$/)

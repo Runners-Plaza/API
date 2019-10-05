@@ -1,10 +1,10 @@
 class RecordError < Granite::Base
-  adapter pg
-  table_name record_errors
+  connection pg
+  table record_errors
 
   belongs_to record
 
-  primary id : Int64
-  field description : String
+  column id : Int64, primary: true
+  column description : String?
   timestamps
 end

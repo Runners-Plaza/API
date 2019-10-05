@@ -4,16 +4,17 @@ class User < Granite::Base
     Manager
   end
 
-  adapter pg
-  table_name users
+  connection pg
+  table users
   before_create set_defaults
 
   has_one runner : Runner
 
-  field fb_id : String
-  field email : String
-  field name : String
-  enum_field position : Position
+  column id : Int64, primary: true
+  column fb_id : String
+  column email : String
+  column name : String
+  enum_column position : Position
   timestamps
 
   def set_defaults

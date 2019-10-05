@@ -20,7 +20,7 @@ module UserHelper
 
   def authenticate!(position : User::Position)
     fb_authenticate!.try { |e| return e }
-    return forbidden!(t("errors.user.denied")) unless current_user.position! >= position
+    return forbidden!(t("errors.user.denied")) unless current_user.position >= position
     nil
   end
 end

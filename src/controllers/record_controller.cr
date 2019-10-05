@@ -10,12 +10,12 @@ class RecordController < ApplicationController
   def index
     status = Record::Status.parse(params["status"]? || "approved")
     authenticate!(User::Position::Manager).try { |e| return e } unless status.approved?
-    RecordRenderer.render paginate(Record.where(status_number: status.value)), approver?: current_user?.try &.position!.manager?
+    RecordRenderer.render paginate(Record.where(status_number: status.value)), approver?: current_user?.try &.position.manager?
   end
 
   def show
-    authenticate!(User::Position::Manager).try { |e| return e } unless record.status!.approved?
-    RecordRenderer.render record, approver?: current_user?.try &.position!.manager?
+    authenticate!(User::Position::Manager).try { |e| return e } unless record.status.approved?
+    RecordRenderer.render record, approver?: current_user?.try &.position.manager?
   end
 
   def update_status
