@@ -5,8 +5,8 @@ class Record < Granite::Base
     Rejected
   end
 
-  adapter pg
-  table_name records
+  connection pg
+  table records
   before_create set_defaults
   before_destroy clear_error, clear_certificate
 
@@ -16,17 +16,17 @@ class Record < Granite::Base
   has_one error : RecordError
   has_one certificate : Certificate
 
-  primary id : Int64
-  field bib_number : String
-  field age_group : String
-  alias_field group, age_group
-  field time : Int32
-  field chip_time : Int32
-  field rank : Int32
-  field group_rank : Int32
-  field remark : String
-  enum_field status : Status
-  field approved_at : Time
+  column id : Int64, primary: true
+  column bib_number : String
+  column age_group : String?
+  alias_column group, age_group
+  column time : Int32
+  column chip_time : Int32?
+  column rank : Int32?
+  column group_rank : Int32?
+  column remark : String?
+  enum_column status : Status
+  column approved_at : Time?
   timestamps
 
   def set_other_attributes(group : String? = nil, runner : Runner? = nil, distance : Distance? = nil, approver : User? = nil)
@@ -40,7 +40,7 @@ class Record < Granite::Base
     if Status.parse? status
       self.status = status
       @approved_at = if self.status == Status::Approved
-                       Time.now
+                       Time.local
                      else
                        nil
                      end
@@ -55,7 +55,7 @@ class Record < Granite::Base
   end
 
   def set_defaults
-    self.status ||= Status::Pending
+    self.status = Status::Pending unless status?
   end
 
   def clear_error

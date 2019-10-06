@@ -1,5 +1,6 @@
 class EventController < ApplicationController
-  PARAMS = %w(name english_name organizer english_organizer location english_location url start_at sign_start_at sign_end_at iaaf aims measured recordable)
+  PARAMS       = %w(name english_name organizer english_organizer location english_location url iaaf aims measured recordable)
+  OTHER_PARAMS = %w(level region start_at sign_start_at sign_end_at)
 
   property! event : Event
 
@@ -18,7 +19,7 @@ class EventController < ApplicationController
 
   def create
     @event = Event.new(params.select(PARAMS))
-    event.set_other_attributes(level: params["level"]?, region: params["region"]?)
+    event.set_other_attributes(params.select(OTHER_PARAMS))
     if event.save
       EventRenderer.render event
     else
@@ -28,6 +29,7 @@ class EventController < ApplicationController
 
   def update
     event.set_attributes(params.select(PARAMS))
+    event.set_other_attributes(params.select(OTHER_PARAMS))
     if event.save
       EventRenderer.render event
     else

@@ -2,23 +2,27 @@ version: 1.0
 shards:
   amber:
     github: amberframework/amber
-    version: 0.27.0
+    version: 0.30.1
 
   amber_router:
     github: amberframework/amber-router
-    version: 0.2.1
+    version: 0.3.0
+
+  ameba:
+    github: crystal-ameba/ameba
+    version: 0.10.1
 
   callback:
-    github: mosop/callback
-    version: 0.6.3
+    github: drujensen/callback
+    version: 0.7.1
 
   citrine-i18n:
     github: amberframework/citrine-i18n
-    version: 0.3.2
+    version: 0.4.0
 
   cli:
-    github: mosop/cli
-    version: 0.7.0
+    github: drujensen/cli
+    version: 0.8.0
 
   compiled_license:
     github: elorest/compiled_license
@@ -26,11 +30,11 @@ shards:
 
   crinder:
     github: c910335/crinder
-    commit: 04faa6ceff06ca4ac3a36a70fef4e09787cafe47
+    commit: 5e7564d1f70b59e21c17db2fb4cf15eded3b9f0d
 
   db:
     github: crystal-lang/crystal-db
-    version: 0.5.1
+    version: 0.6.0
 
   exception_page:
     github: crystal-loot/exception_page
@@ -38,11 +42,11 @@ shards:
 
   granite:
     github: amberframework/granite
-    version: 0.15.2
+    version: 0.17.2
 
   i18n:
     github: TechMagister/i18n.cr
-    version: 0.2.0
+    version: 0.3.1
 
   inflector:
     github: phoffer/inflector.cr
@@ -54,23 +58,23 @@ shards:
 
   liquid:
     github: TechMagister/liquid.cr
-    version: 0.3.0
+    version: 0.3.1
 
   micrate:
     github: amberframework/micrate
-    version: 0.3.3
+    version: 0.3.5
 
   mysql:
     github: crystal-lang/crystal-mysql
-    version: 0.5.1
+    version: 0.8.0
 
   optarg:
-    github: mosop/optarg
-    version: 0.5.8
+    github: drujensen/optarg
+    version: 0.7.0
 
   pg:
     github: will/crystal-pg
-    version: 0.15.0
+    version: 0.18.1
 
   pool:
     github: ysbaddaden/pool
@@ -78,11 +82,11 @@ shards:
 
   redis:
     github: stefanwille/crystal-redis
-    version: 2.0.0
+    version: 2.2.1
 
   shale:
     github: c910335/shale
-    version: 0.2.0
+    version: 0.2.1
 
   shell-table:
     github: luckyframework/shell-table.cr
@@ -94,7 +98,7 @@ shards:
 
   sqlite3:
     github: crystal-lang/crystal-sqlite3
-    version: 0.10.0
+    version: 0.13.0
 
   string_inflection:
     github: mosop/string_inflection
@@ -102,5 +106,5 @@ shards:
 
   teeplate:
     github: mosop/teeplate
-    version: 0.7.0
+    version: 0.8.0
 

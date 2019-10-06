@@ -5,8 +5,8 @@ class Runner < Granite::Base
     Rejected
   end
 
-  adapter pg
-  table_name runners
+  connection pg
+  table runners
   before_create set_defaults
   before_destroy clear_error
 
@@ -15,15 +15,16 @@ class Runner < Granite::Base
   has_one error : RunnerError
   has_many records
 
-  field name : String
-  field alternative_name : String
-  field english_name : String
-  field alternative_english_name : String
-  field birthday : Time
-  field phone : String
-  field organization : String
-  enum_field status : Status
-  field approved_at : Time
+  column id : Int64, primary: true
+  column name : String?
+  column alternative_name : String?
+  column english_name : String?
+  column alternative_english_name : String?
+  column birthday : Time
+  column phone : String
+  column organization : String
+  enum_column status : Status
+  column approved_at : Time?
   timestamps
 
   def set_other_attributes(user : User? = nil, birthday : String? = nil)
@@ -36,7 +37,7 @@ class Runner < Granite::Base
     if Status.parse? status
       self.status = status
       @approved_at = if self.status == Status::Approved
-                       Time.now
+                       Time.local
                      else
                        nil
                      end
@@ -55,7 +56,7 @@ class Runner < Granite::Base
   end
 
   def set_defaults
-    self.status ||= Status::Pending
+    self.status = Status::Pending unless status?
   end
 
   def clear_error

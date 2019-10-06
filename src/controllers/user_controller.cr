@@ -7,11 +7,11 @@ class UserController < ApplicationController
   end
 
   def index
-    UserRenderer.render paginate(User), fb_id?: current_user?.try &.position!.manager?
+    UserRenderer.render paginate(User), fb_id?: current_user?.try &.position.manager?
   end
 
   def show
-    UserRenderer.render user, fb_id?: current_user?.try &.position!.manager?
+    UserRenderer.render user, fb_id?: current_user?.try &.position.manager?
   end
 
   def update

@@ -1,21 +1,22 @@
 require "granite/adapter/pg"
 
-Granite::Adapters << Granite::Adapter::Pg.new({name: "pg", url: ENV["DATABASE_URL"]? || Amber.settings.database_url})
+Granite::Connections << Granite::Adapter::Pg.new(name: "pg", url: ENV["DATABASE_URL"]? || Amber.settings.database_url)
 Granite.settings.default_timezone = Time::Location.local
 Granite.settings.logger = Amber.settings.logger.dup
 Granite.settings.logger.not_nil!.progname = "Granite"
 
 class Granite::Base
-  macro enum_field(decl)
+  macro enum_column(decl)
     @{{decl.var}} : {{decl.type}}? = nil
-    field {{decl.var}}_number : Int32
+    column {{decl.var}}_number : Int32
 
-    def {{decl.var}}
-      @{{decl.var}} ||= {{decl.type}}.from_value({{decl.var}}_number) if {{decl.var}}_number
+    def {{decl.var}}?
+      @{{decl.var}} ||= {{decl.type}}.from_value({{decl.var}}_number) if @{{decl.var}}_number
+      @{{decl.var}}
     end
 
-    def {{decl.var}}!
-      {{decl.var}}.not_nil!
+    def {{decl.var}}
+      {{decl.var}}?.not_nil!
     end
 
     def {{decl.var}}=({{decl.var}} : {{decl.type}})
@@ -36,7 +37,7 @@ class Granite::Base
     end
   end
 
-  macro alias_field(a, b)
+  macro alias_column(a, b)
     {%
       a = a.id
       b = b.id

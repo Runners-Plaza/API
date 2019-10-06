@@ -1,10 +1,10 @@
 class RunnerError < Granite::Base
-  adapter pg
-  table_name runner_errors
+  connection pg
+  table runner_errors
 
   belongs_to runner
 
-  primary id : Int64
-  field description : String
+  column id : Int64, primary: true
+  column description : String?
   timestamps
 end
