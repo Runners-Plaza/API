@@ -35,11 +35,10 @@ module FBHelper
   end
 
   def fb_user? : FBUser?
-    @fb_user ||= HTTP::Client.get("#{base_url}/v3.1/me?fields=name,email", headers: HTTP::Headers{"Authorization" => "Bearer #{token_string}"}) do |response|
-      if response.success?
-        FBUser.from_json(response.body_io)
-      end
-    end
+    response = HTTP::Client.get("#{base_url}/v3.1/me?fields=name,email", headers: HTTP::Headers{"Authorization" => "Bearer #{token_string}"})
+    @fb_user ||= if response.success?
+                   FBUser.from_json(response.body)
+                 end
   end
 
   def token_scopes : Array(String)
@@ -56,10 +55,11 @@ module FBHelper
 
   def token_info? : TokenInfo?
     @token_info ||= if token_string
-                      HTTP::Client.get("#{base_url}/debug_token?input_token=#{token_string}", headers: HTTP::Headers{"Authorization" => "Bearer #{client_token}"}) do |response|
-                        if response.success?
-                          TokenInfo.from_json(response.body_io)
-                        end
+                      response = HTTP::Client.get("#{base_url}/debug_token?input_token=#{token_string}", headers: HTTP::Headers{"Authorization" => "Bearer #{client_token}"})
+                      if response.success?
+                        TokenInfo.from_json(response.body)
+                      else
+                        nil
                       end
                     end
   end

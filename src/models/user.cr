@@ -12,8 +12,8 @@ class User < Granite::Base
 
   column id : Int64, primary: true
   column fb_id : String
-  column email : String
   column name : String
+  column email : String
   enum_column position : Position
   timestamps
 
