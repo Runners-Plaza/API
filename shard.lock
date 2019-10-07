@@ -60,6 +60,10 @@ shards:
     github: TechMagister/liquid.cr
     version: 0.3.1
 
+  mass_spec:
+    github: c910335/mass-spec
+    version: 0.3.0
+
   micrate:
     github: amberframework/micrate
     version: 0.3.5
@@ -107,4 +111,8 @@ shards:
   teeplate:
     github: mosop/teeplate
     version: 0.8.0
+
+  webmock:
+    github: manastech/webmock.cr
+    version: 0.12.1
 
