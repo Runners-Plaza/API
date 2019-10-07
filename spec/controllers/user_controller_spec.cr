@@ -8,7 +8,7 @@ describe UserController do
           get "/users"
 
           status_code.should eq(200)
-          json_body.should contain([
+          json_body.should match([
             {
               "id"         => 2,
               "name"       => "Member",
@@ -36,7 +36,7 @@ describe UserController do
           get "/users", HTTP::Headers{"Authorization" => "Bearer manager_token"}
 
           status_code.should eq(200)
-          json_body.should contain([
+          json_body.should match([
             {
               "id"         => 2,
               "fb_id"      => "member",
@@ -68,7 +68,7 @@ describe UserController do
           get "/users/1"
 
           status_code.should eq(200)
-          json_body.should contain({
+          json_body.should match({
             "id"         => 1,
             "name"       => "Manager",
             "email"      => "manager@bar.com",
@@ -86,7 +86,7 @@ describe UserController do
           get "/users/1", HTTP::Headers{"Authorization" => "Bearer manager_token"}
 
           status_code.should eq(200)
-          json_body.should contain({
+          json_body.should match({
             "id"         => 1,
             "fb_id"      => "manager",
             "name"       => "Manager",
@@ -106,7 +106,7 @@ describe UserController do
         patch "/users/2", HTTP::Headers{"Authorization" => "Bearer manager_token"}, form: {"position" => "manager"}
 
         status_code.should eq(200)
-        json_body.should contain({
+        json_body.should match({
           "id"         => 2,
           "fb_id"      => "member",
           "name"       => "Member",
@@ -125,7 +125,7 @@ describe UserController do
         delete "/users/2", HTTP::Headers{"Authorization" => "Bearer manager_token"}
 
         status_code.should eq(200)
-        json_body.should contain({
+        json_body.should match({
           "id"         => 2,
           "fb_id"      => "member",
           "name"       => "Member",

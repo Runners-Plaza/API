@@ -62,7 +62,7 @@ shards:
 
   mass_spec:
     github: c910335/mass-spec
-    version: 0.3.0
+    version: 0.3.1
 
   micrate:
     github: amberframework/micrate
