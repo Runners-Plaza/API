@@ -99,4 +99,46 @@ describe UserController do
       end
     end
   end
+
+  describe "#update" do
+    it "updates a user" do
+      with_users do
+        patch "/users/2", HTTP::Headers{"Authorization" => "Bearer manager_token"}, form: {"position" => "manager"}
+
+        status_code.should eq(200)
+        json_body.should contain({
+          "id"         => 2,
+          "fb_id"      => "member",
+          "name"       => "Member",
+          "email"      => "member@foo.com",
+          "position"   => "Manager",
+          "created_at" => String,
+          "updated_at" => String,
+        })
+      end
+    end
+  end
+
+  describe "#destroy" do
+    it "deletes a user" do
+      with_users do
+        delete "/users/2", HTTP::Headers{"Authorization" => "Bearer manager_token"}
+
+        status_code.should eq(200)
+        json_body.should contain({
+          "id"         => 2,
+          "fb_id"      => "member",
+          "name"       => "Member",
+          "email"      => "member@foo.com",
+          "position"   => "Member",
+          "created_at" => String,
+          "updated_at" => String,
+        })
+
+        get "/users/2"
+
+        status_code.should eq(404)
+      end
+    end
+  end
 end
