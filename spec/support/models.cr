@@ -11,7 +11,6 @@ end
 def with_manager(skip_clear = false)
   clear User, skip_clear do
     User.create(
-      id: 1,
       fb_id: "manager",
       name: "Manager",
       email: "manager@bar.com",
@@ -24,7 +23,6 @@ end
 def with_member(skip_clear = false)
   clear User, skip_clear do
     User.create(
-      id: 2,
       fb_id: "member",
       name: "Member",
       email: "member@foo.com",
@@ -38,6 +36,62 @@ def with_users
   with_manager do
     with_member(true) do
       yield
+    end
+  end
+end
+
+def with_approved_runner
+  clear Runner do
+    with_users do
+      Runner.create(
+        user_id: 2_i64,
+        name: "runner",
+        birthday: (Time.local - 20.years).at_beginning_of_day,
+        phone: "0912345678",
+        organization: "org",
+        status_number: 1,
+        approved_at: Time.local,
+        approver_id: 1_i64
+      )
+      yield
+    end
+  end
+end
+
+def with_pending_runner
+  clear Runner do
+    with_users do
+      Runner.create(
+        user_id: 2_i64,
+        name: "runner",
+        birthday: (Time.local - 20.years).at_beginning_of_day,
+        phone: "0912345678",
+        organization: "org"
+      )
+      yield
+    end
+  end
+end
+
+def with_rejected_runner
+  clear Runner do
+    clear RunnerError do
+      with_users do
+        Runner.create(
+          user_id: 2_i64,
+          name: "runner",
+          birthday: (Time.local - 20.years).at_beginning_of_day,
+          phone: "0912345678",
+          organization: "org",
+          status_number: 2,
+          approver_id: 1_i64
+        )
+        RunnerError.create(
+          runner_id: 1_i64,
+          description: "desc"
+        )
+        yield
+      end
     end
   end
 end
