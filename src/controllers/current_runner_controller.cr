@@ -1,6 +1,6 @@
 class CurrentRunnerController < ApplicationController
   CREATE_PARAMS = %w(name alternative_name english_name alternative_english_name phone organization)
-  UPDATE_PARAMS = %w(phone group)
+  UPDATE_PARAMS = %w(phone organization)
 
   property! runner : Runner
 
