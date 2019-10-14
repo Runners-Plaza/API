@@ -15,7 +15,7 @@ class Event < Granite::Base
     Central
     Southern
     Eastern
-    Other
+    Others
   end
 
   connection pg
