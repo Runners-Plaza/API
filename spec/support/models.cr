@@ -95,3 +95,21 @@ def with_rejected_runner
     end
   end
 end
+
+def with_event
+  clear Event do
+    Event.create(
+      name: "name",
+      organizer: "organizer",
+      location: "somewhere",
+      level_number: 6,
+      region_number: 1,
+      start_at: Time.local + 1.month,
+      iaaf: true,
+      aims: false,
+      measured: false,
+      recordable: true
+    )
+    yield
+  end
+end
