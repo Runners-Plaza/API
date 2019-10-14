@@ -134,10 +134,7 @@ describe UserController do
           "created_at" => String,
           "updated_at" => String,
         })
-
-        get "/users/2"
-
-        status_code.should eq(404)
+        User.find(2).should be_nil
       end
     end
   end
