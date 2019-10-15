@@ -113,3 +113,15 @@ def with_event
     yield
   end
 end
+
+def with_distance
+  clear Distance do
+    with_event do
+      Distance.create(
+        name: "name",
+        event_id: 1_i64
+      )
+      yield
+    end
+  end
+end
