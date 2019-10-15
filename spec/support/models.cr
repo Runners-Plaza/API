@@ -125,3 +125,22 @@ def with_distance
     end
   end
 end
+
+def with_record(status : Record::Status = Record::Status::Pending, approver_id : Int64? = nil)
+  clear Record do
+    with_approved_runner do
+      with_distance do
+        Record.create(
+          distance_id: 1_i64,
+          runner_id: 1_i64,
+          bib_number: "1234",
+          time: 5678,
+          status_number: status.value,
+          approver_id: approver_id,
+          approved_at: status == Record::Status::Approved ? Time.local : nil,
+        )
+        yield
+      end
+    end
+  end
+end

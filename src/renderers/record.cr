@@ -7,7 +7,7 @@ class RecordRenderer < Crinder::Base(Record)
   field distance, with: DistanceRenderer
   field bib_number : String
   field group : String?
-  field time : Int?
+  field time : Int
   field chip_time : Int?
   field rank : Int?
   field group_rank : Int?
