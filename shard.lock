@@ -30,7 +30,7 @@ shards:
 
   crinder:
     github: c910335/crinder
-    commit: 5e7564d1f70b59e21c17db2fb4cf15eded3b9f0d
+    version: 0.2.0
 
   db:
     github: crystal-lang/crystal-db
@@ -58,7 +58,7 @@ shards:
 
   liquid:
     github: TechMagister/liquid.cr
-    version: 0.3.1
+    version: 0.3.2
 
   mass_spec:
     github: c910335/mass-spec

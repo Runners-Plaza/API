@@ -1,7 +1,4 @@
 class RunnerRenderer < Crinder::Base(Runner)
-  class_getter? approver : Bool? = false
-  class_getter? user : Bool? = false
-
   field id : Int?
   field user, with: DetailedUserRenderer, value: ->{ object.user_id.try { user } }, if: user?
   field name : String
@@ -17,7 +14,6 @@ class RunnerRenderer < Crinder::Base(Runner)
   field created_at : String
   field updated_at : String
 
-  def self.render(runner, user? @@user = false, approver? @@approver = false)
-    render(runner)
-  end
+  option user? : Bool? = false
+  option approver? : Bool? = false
 end

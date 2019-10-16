@@ -44,7 +44,7 @@ class CurrentRunnerController < ApplicationController
 
   def error
     return not_found! t("errors.runner.error.not_found") unless runner.error
-    RunnerErrorRenderer.render t("runner.error.title"), runner.error!
+    RunnerErrorRenderer.render runner.error!, title: t("runner.error.title")
   end
 
   private def set_runner
