@@ -144,3 +144,16 @@ def with_record(status : Record::Status = Record::Status::Pending, approver_id :
     end
   end
 end
+
+def with_certificate
+  clear Certificate do
+    with_record do
+      Certificate.create(
+        record_id: 1_i64,
+        type: "jpeg"
+      )
+      FileUtils.cp("spec/support/1.jpg", "certificates/1.jpeg")
+      yield
+    end
+  end
+end
