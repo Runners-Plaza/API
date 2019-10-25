@@ -434,4 +434,53 @@ describe RecordController do
       end
     end
   end
+
+  describe "#update_status" do
+    it "approves a record" do
+      with_record do
+        patch "/records/1/status", HTTP::Headers{"Authorization" => "Bearer manager_token"}, form: {"status" => "approved"}
+
+        status_code.should eq(204)
+
+        record = Record.find!(1)
+
+        record.status.should eq(Record::Status::Approved)
+        record.approver_id.should eq(1)
+        record.approved_at.should be_a(Time)
+      end
+    end
+
+    it "rejects a record" do
+      clear RecordError do
+        with_record do
+          patch "/records/1/status", HTTP::Headers{"Authorization" => "Bearer manager_token"}, form: {"status" => "rejected", "reason" => "reason"}
+
+          status_code.should eq(204)
+
+          record = Record.find!(1)
+
+          record.status.should eq(Record::Status::Rejected)
+          record.approver_id.should eq(1)
+          record.approved_at.should be_nil
+          record.error!.description.should eq("reason")
+        end
+      end
+    end
+  end
+
+  describe "error" do
+    context "by Manager" do
+      it "gets the rejected reason for a record" do
+        with_record Record::Status::Rejected, 1_i64 do
+          get "/records/1/error", HTTP::Headers{"Authorization" => "Bearer manager_token"}
+
+          status_code.should eq(200)
+          json_body.should match({
+            "title"       => "Record: Rejected",
+            "description" => "desc",
+          })
+        end
+      end
+    end
+  end
 end

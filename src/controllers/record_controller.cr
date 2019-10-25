@@ -28,7 +28,7 @@ class RecordController < ApplicationController
   end
 
   def error
-    authenticate!(User::Position::Manager).try { |e| return e } unless current_user == record.runner.user
+    authenticate!(User::Position::Manager).try { |e| return e } unless current_user.id == record.runner.user_id
     return not_found! t("errors.record.error.not_found") unless record.error
     RecordErrorRenderer.render record.error!, title: t("record.error.title")
   end
