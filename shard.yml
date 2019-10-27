@@ -26,7 +26,7 @@ dependencies:
 
   crinder:
     github: c910335/crinder
-    branch: master
+    version: ~> 0.2.0
 
   shale:
     github: c910335/shale
@@ -40,3 +40,11 @@ development_dependencies:
   ameba:
     github: crystal-ameba/ameba
     version: ~> 0.10.1
+
+  mass_spec:
+    github: c910335/mass-spec
+    version: ~> 0.3.1
+
+  webmock:
+    github: manastech/webmock.cr
+    version: ~> 0.12.1

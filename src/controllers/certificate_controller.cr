@@ -23,7 +23,7 @@ class CertificateController < ApplicationController
   end
 
   def show
-    authenticate!(User::Position::Manager).try { |e| return e } unless current_user == record.runner.user
+    authenticate!(User::Position::Manager).try { |e| return e } unless current_user.id == record.runner.user_id
 
     if certificate = record.certificate
       data_uri(certificate.type, File.read("certificates/#{certificate.id}.#{certificate.type}"))

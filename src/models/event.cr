@@ -15,11 +15,13 @@ class Event < Granite::Base
     Central
     Southern
     Eastern
-    Other
+    Others
   end
 
   connection pg
   table events
+
+  before_destroy clear_distances
 
   has_many distances : Distance
 
@@ -49,5 +51,11 @@ class Event < Granite::Base
     @sign_start_at = Time.parse(args["sign_start_at"], "%F %T", Granite.settings.default_timezone) if args["sign_start_at"]?
     @sign_end_at = Time.parse(args["sign_end_at"], "%F %T", Granite.settings.default_timezone) if args["sign_end_at"]?
     self
+  end
+
+  def clear_distances
+    distances.each do |d|
+      d.destroy
+    end
   end
 end

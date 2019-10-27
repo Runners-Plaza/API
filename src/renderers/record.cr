@@ -1,13 +1,11 @@
 class RecordRenderer < Crinder::Base(Record)
-  class_getter? approver : Bool? = false
-
   field id : Int?
   field runner, with: RunnerRenderer
   field event, with: EventRenderer, value: ->{ distance.event }
   field distance, with: DistanceRenderer
   field bib_number : String
   field group : String?
-  field time : Int?
+  field time : Int
   field chip_time : Int?
   field rank : Int?
   field group_rank : Int?
@@ -18,7 +16,5 @@ class RecordRenderer < Crinder::Base(Record)
   field updated_at : String
   field created_at : String
 
-  def self.render(record, approver? @@approver = false)
-    render(record)
-  end
+  option approver? : Bool? = false
 end

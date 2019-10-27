@@ -1,13 +1,15 @@
 ENV["AMBER_ENV"] ||= "test"
 
 require "spec"
+require "mass_spec"
+require "webmock"
 require "micrate"
-require "../config/*"
+require "./support/*"
+require "../src/*"
+
+include MassSpec::GlobalDSL
+MassSpec.configure { headers({"Origin" => "dummy"}) }
 
 Micrate::DB.connection_url = Amber.settings.database_url
-
-# Automatically run migrations on the test database
 Micrate::Cli.run_up
-
-# Disable Granite logs in tests
-Granite.settings.logger = Logger.new nil
+# Granite.settings.logger = Logger.new nil
