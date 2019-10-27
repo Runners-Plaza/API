@@ -14,7 +14,7 @@ class RecordController < ApplicationController
   end
 
   def show
-    authenticate!(User::Position::Manager).try { |e| return e } unless record.status.approved?
+    authenticate!(User::Position::Manager).try { |e| return e } unless record.status.approved? || current_user?.try &.id == record.runner.user_id
     RecordRenderer.render record, approver?: current_user?.try &.position.manager?
   end
 
