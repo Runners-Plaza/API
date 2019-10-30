@@ -17,7 +17,7 @@ describe CertificateController do
           }, body: io)
 
           status_code.should eq(200)
-          body.should eq(<<-PNG
+          body.should eq(<<-JPEG
                             data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/wAARCAABAAEDASIAAhEBAxEB/8QAHwAA
                             AQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
                             AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcY
@@ -34,7 +34,7 @@ describe CertificateController do
                             5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm/90ABAAB/9oADAMBAAIRAxEAPwDm
                             6KKKAP/Z
 
-                            PNG
+                            JPEG
           )
         end
       end
@@ -47,7 +47,7 @@ describe CertificateController do
         get "/records/1/certificate", HTTP::Headers{"Authorization" => "Bearer member_token"}
 
         status_code.should eq(200)
-        body.should eq(<<-PNG
+        body.should eq(<<-JPEG
                           data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/wAARCAABAAEDASIAAhEBAxEB/8QAHwAA
                           AQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA
                           AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcY
@@ -64,7 +64,7 @@ describe CertificateController do
                           5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm/90ABAAB/9oADAMBAAIRAxEAPwDm
                           6KKKAP/Z
 
-                          PNG
+                          JPEG
         )
       end
     end

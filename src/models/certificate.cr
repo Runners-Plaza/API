@@ -5,6 +5,6 @@ class Certificate < Granite::Base
   belongs_to record
 
   column id : Int64, primary: true
-  column type : String
+  column data : String, converter: BytesConverter
   timestamps
 end

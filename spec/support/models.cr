@@ -158,9 +158,9 @@ def with_certificate
     with_record do
       Certificate.create(
         record_id: 1_i64,
-        type: "jpeg"
+        type: "jpeg",
+        data: "data:image/jpeg;base64,#{Base64.encode(File.open("spec/support/1.jpg").gets_to_end)}"
       )
-      FileUtils.cp("spec/support/1.jpg", "certificates/1.jpeg")
       yield
     end
   end
