@@ -55,3 +55,14 @@ class Granite::Base
     end
   end
 end
+
+module BytesConverter
+  def self.to_db(value : String)
+    value.to_slice
+  end
+
+  def self.from_rs(result : DB::ResultSet)
+    value = result.read(Bytes)
+    String.new value
+  end
+end

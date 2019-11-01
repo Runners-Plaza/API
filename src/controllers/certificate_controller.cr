@@ -12,11 +12,13 @@ class CertificateController < ApplicationController
     return forbidden!(t("errors.user.denied")) unless record.status.pending?
 
     image = params.files["certificate"]
-    if record.certificate.nil? && (filename = image.filename) && (md = filename.match /\.(gif|jpg|jpeg|png)$/)
-      type = md[1] == "jpg" ? "jpeg" : md[1]
-      certificate = Certificate.create(record_id: record.id, type: type)
-      FileUtils.cp(image.file.path, "certificates/#{certificate.id}.#{type}")
-      data_uri(type, image.file.gets_to_end)
+    if record.certificate.nil? &&
+       (filename = image.filename) &&
+       (md = filename.match /\.(gif|jpg|jpeg|png)$/) &&
+       (type = md[1] == "jpg" ? "jpeg" : md[1]) &&
+       (certificate = Certificate.new(record_id: record.id, data: data_uri(type, image.file.gets_to_end))) &&
+       certificate.save
+      certificate.data
     else
       bad_request! t("errors.certificate.create")
     end
@@ -26,7 +28,7 @@ class CertificateController < ApplicationController
     authenticate!(User::Position::Manager).try { |e| return e } unless current_user.id == record.runner.user_id
 
     if certificate = record.certificate
-      data_uri(certificate.type, File.read("certificates/#{certificate.id}.#{certificate.type}"))
+      certificate.data
     else
       not_found! t("errors.certificate.not_found")
     end
