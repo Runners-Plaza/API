@@ -5,8 +5,9 @@ class EventController < ApplicationController
   property! event : Event
 
   before_action do
-    only [:create, :update, :destroy] { authenticate!(User::Position::Manager) }
-    only [:show, :update, :destroy] { set_event }
+    only [:create] { authenticate!(User::Position::Manager) }
+    only [:show] { set_event }
+    only [:update, :destroy] { authenticate!(User::Position::Manager) || set_event }
   end
 
   def index

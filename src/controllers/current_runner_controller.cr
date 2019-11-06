@@ -5,8 +5,8 @@ class CurrentRunnerController < ApplicationController
   property! runner : Runner
 
   before_action do
-    all { authenticate!(User::Position::Member) }
-    only [:show, :update, :destroy, :error] { set_runner }
+    only [:create] { authenticate!(User::Position::Member) }
+    only [:show, :update, :destroy, :error] { authenticate!(User::Position::Member) || set_runner }
   end
 
   def show
