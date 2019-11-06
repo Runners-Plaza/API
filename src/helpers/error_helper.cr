@@ -44,6 +44,7 @@ module ErrorHelper
 
   def error!(type : Symbol, description : String)
     response.status_code = STATUS_CODES[type]
+    response.content_type = "application/json"
     context.content = error_json(type, description)
   end
 

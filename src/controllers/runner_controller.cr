@@ -3,8 +3,8 @@ class RunnerController < ApplicationController
   property! user : User
 
   before_action do
-    only [:update_status, :error] { authenticate!(User::Position::Manager) }
-    only [:show, :update_status, :error] { set_runner }
+    only [:update_status, :error] { authenticate!(User::Position::Manager) || set_runner }
+    only [:show] { set_runner }
     only [:user_show] { authenticate!(User::Position::Manager) || set_user }
   end
 

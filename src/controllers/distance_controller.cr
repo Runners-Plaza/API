@@ -5,9 +5,10 @@ class DistanceController < ApplicationController
   property! distance : Distance
 
   before_action do
-    only [:create, :update, :destroy] { authenticate!(User::Position::Manager) }
-    only [:create, :index] { set_event }
-    only [:show, :update, :destroy] { set_distance }
+    only [:index] { set_event }
+    only [:show] { set_distance }
+    only [:create] { authenticate!(User::Position::Manager) || set_event }
+    only [:update, :destroy] { authenticate!(User::Position::Manager) || set_distance }
   end
 
   def index

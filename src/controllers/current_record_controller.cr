@@ -8,8 +8,8 @@ class CurrentRecordController < ApplicationController
 
   before_action do
     all { authenticate!(User::Position::Member) }
-    only [:create] { set_distance }
-    only [:index, :create] { set_runner }
+    only [:create] { set_runner || set_distance }
+    only [:index] { set_runner }
     only [:update, :destroy] { set_runner || set_record }
   end
 

@@ -2,9 +2,9 @@ class RecordController < ApplicationController
   property! record : Record
 
   before_action do
-    only [:update_status] { authenticate!(User::Position::Manager) }
-    only [:error] { authenticate!(User::Position::Member) }
-    only [:show, :update_status, :error] { set_record }
+    only [:update_status] { authenticate!(User::Position::Manager) || set_record }
+    only [:error] { authenticate!(User::Position::Member) || set_record }
+    only [:show] { set_record }
   end
 
   def index

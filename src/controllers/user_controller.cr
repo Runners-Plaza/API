@@ -2,8 +2,8 @@ class UserController < ApplicationController
   property! user : User
 
   before_action do
-    only [:show, :update, :destroy] { set_user }
-    only [:update, :destroy] { authenticate!(User::Position::Manager) }
+    only [:show] { set_user }
+    only [:update, :destroy] { authenticate!(User::Position::Manager) || set_user }
   end
 
   def index
