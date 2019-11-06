@@ -25,7 +25,7 @@ module FBHelper
 
   def fb_authenticate! : String?
     return token_missing!(REALM) unless token_string
-    return token_invalid!(REALM) unless token_info? && token_data.is_valid
+    return token_invalid!(REALM) unless token_info? && token_data.valid?
     return scope_insufficient!(REALM) unless (token_scopes & SCOPES).size == SCOPES.size
     nil
   end
@@ -55,11 +55,14 @@ module FBHelper
 
   def token_info? : TokenInfo?
     @token_info ||= if token_string
-                      response = HTTP::Client.get("#{base_url}/debug_token?input_token=#{token_string}", headers: HTTP::Headers{"Authorization" => "Bearer #{client_token}"})
-                      if response.success?
-                        TokenInfo.from_json(response.body)
+                      if fb_token = FBToken.find_valid(token_string)
+                        TokenInfo.new(fb_token)
                       else
-                        nil
+                        response = HTTP::Client.get("#{base_url}/debug_token?input_token=#{token_string}", headers: HTTP::Headers{"Authorization" => "Bearer #{client_token}"})
+                        if response.success? && (info = TokenInfo.from_json(response.body))
+                          FBToken.create(token: token_string, scope_string: info.data.scopes.join(' '), user_id: info.data.user_id, expires_at: info.data.expires_at)
+                          info
+                        end
                       end
                     end
   end
@@ -83,14 +86,22 @@ module FBHelper
 
     class Data
       JSON.mapping(
-        app_id: String,
-        type: String,
-        application: String,
-        expires_at: {type: Time, converter: Time::EpochConverter},
-        is_valid: Bool,
+        user_id: String,
         scopes: Array(String),
-        user_id: String
+        expires_at: {type: Time, converter: Time::EpochConverter},
+        is_valid: Bool
       )
+
+      def initialize(@user_id, @scopes, @expires_at, @is_valid)
+      end
+
+      def valid?
+        is_valid
+      end
+    end
+
+    def initialize(fb_token : FBToken)
+      @data = Data.new(fb_token.user_id, fb_token.scopes, fb_token.expires_at, fb_token.valid?)
     end
   end
 end
