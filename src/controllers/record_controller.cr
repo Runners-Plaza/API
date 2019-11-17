@@ -1,5 +1,6 @@
 class RecordController < ApplicationController
   property! record : Record
+  property! event : Event
 
   before_action do
     only [:update_status] { authenticate!(User::Position::Manager) || set_record }
@@ -10,7 +11,18 @@ class RecordController < ApplicationController
   def index
     status = Record::Status.parse(params["status"]? || "approved")
     authenticate!(User::Position::Manager).try { |e| return e } unless status.approved?
-    RecordRenderer.render paginate(Record.where(status_number: status.value)), approver?: current_user?.try &.position.manager?
+    records = if event_id = params["event_id"]?
+                return not_found! t("errors.event.not_found") unless @event = Event.find(event_id)
+                distances = event.distances.to_a
+                if distances.empty?
+                  Record.limit(0)
+                else
+                  Record.where(distance_id: distances.map &.id!)
+                end
+              else
+                Record
+              end
+    RecordRenderer.render paginate(records.where(status_number: status.value)), approver?: current_user?.try &.position.manager?
   end
 
   def show
