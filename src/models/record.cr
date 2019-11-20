@@ -39,6 +39,7 @@ class Record < Granite::Base
   def update_status(status : String, approver : User, reason : String? = nil)
     if Status.parse? status
       self.status = status
+      return nil if self.status == Status::Approved && self.certificate.nil?
       @approved_at = if self.status == Status::Approved
                        Time.local
                      else
