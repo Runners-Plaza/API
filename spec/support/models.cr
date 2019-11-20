@@ -153,13 +153,24 @@ def with_record(status : Record::Status = Record::Status::Pending, approver_id :
   end
 end
 
-def with_certificate
+def with_image_certificate
   clear Certificate do
     with_record do
       Certificate.create(
         record_id: 1_i64,
-        type: "jpeg",
         data: "data:image/jpeg;base64,#{Base64.encode(File.open("spec/support/1.jpg").gets_to_end)}"
+      )
+      yield
+    end
+  end
+end
+
+def with_pdf_certificate
+  clear Certificate do
+    with_record do
+      Certificate.create(
+        record_id: 1_i64,
+        data: "data:application/pdf;base64,#{Base64.encode(File.open("spec/support/1.pdf").gets_to_end)}"
       )
       yield
     end
