@@ -14,7 +14,7 @@ class CertificateController < ApplicationController
     image = params.files["certificate"]
     if record.certificate.nil? &&
        (filename = image.filename) &&
-       (md = filename.match /\.(gif|jpg|jpeg|png)$/) &&
+       (md = filename.match /\.(gif|jpg|jpeg|png|pdf)$/) &&
        (type = md[1] == "jpg" ? "jpeg" : md[1]) &&
        (certificate = Certificate.new(record_id: record.id, data: data_uri(type, image.file.gets_to_end))) &&
        certificate.save
@@ -35,7 +35,12 @@ class CertificateController < ApplicationController
   end
 
   private def data_uri(type, data)
-    "data:image/#{type};base64,#{Base64.encode(data)}"
+    type = if type == "pdf"
+             "application/pdf"
+           else
+             "image/#{type}"
+           end
+    "data:#{type};base64,#{Base64.encode(data)}"
   end
 
   private def set_runner
