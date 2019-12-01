@@ -573,7 +573,7 @@ describe RecordController do
 
   describe "#update_status" do
     it "approves a record" do
-      with_record do
+      with_image_certificate do
         patch "/records/1/status", HTTP::Headers{"Authorization" => "Bearer manager_token"}, form: {"status" => "approved"}
 
         status_code.should eq(204)
