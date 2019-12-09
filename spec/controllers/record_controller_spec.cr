@@ -285,6 +285,155 @@ describe RecordController do
     end
   end
 
+  describe "#runner_index" do
+    context "not log in" do
+      it "lists approved records of a runner" do
+        with_record Record::Status::Approved, 1_i64 do
+          get "/runners/1/records"
+
+          status_code.should eq(200)
+          json_body.should match([{
+            "id"     => 1,
+            "runner" => {
+              "id"                       => 1,
+              "name"                     => "runner",
+              "alternative_name"         => nil,
+              "english_name"             => nil,
+              "alternative_english_name" => nil,
+              "birthday"                 => String,
+              "phone"                    => "0912345678",
+              "organization"             => "org",
+              "status"                   => "Approved",
+              "approved_at"              => String,
+              "created_at"               => String,
+              "updated_at"               => String,
+            },
+            "event" => {
+              "id"                => 1,
+              "name"              => "name",
+              "english_name"      => nil,
+              "organizer"         => "organizer",
+              "english_organizer" => nil,
+              "location"          => "somewhere",
+              "english_location"  => nil,
+              "level"             => "Full",
+              "region"            => "Central",
+              "url"               => nil,
+              "start_at"          => String,
+              "sign_start_at"     => nil,
+              "sign_end_at"       => nil,
+              "iaaf"              => true,
+              "aims"              => false,
+              "measured"          => false,
+              "recordable"        => true,
+              "created_at"        => String,
+              "updated_at"        => String,
+            },
+            "distance" => {
+              "id"           => 1,
+              "name"         => "name",
+              "distance"     => nil,
+              "cost"         => nil,
+              "time_limit"   => nil,
+              "runner_limit" => nil,
+              "created_at"   => String,
+              "updated_at"   => String,
+            },
+            "bib_number"  => "1234",
+            "group"       => nil,
+            "time"        => 5678,
+            "chip_time"   => nil,
+            "rank"        => nil,
+            "group_rank"  => nil,
+            "remark"      => nil,
+            "status"      => "Approved",
+            "approved_at" => String,
+            "updated_at"  => String,
+            "created_at"  => String,
+          }])
+        end
+      end
+    end
+
+    context "by Manager" do
+      it "lists approved records of a runner with approver" do
+        with_record Record::Status::Approved, 1_i64 do
+          get "/runners/1/records", HTTP::Headers{"Authorization" => "Bearer manager_token"}
+
+          status_code.should eq(200)
+          json_body.should match([{
+            "id"     => 1,
+            "runner" => {
+              "id"                       => 1,
+              "name"                     => "runner",
+              "alternative_name"         => nil,
+              "english_name"             => nil,
+              "alternative_english_name" => nil,
+              "birthday"                 => String,
+              "phone"                    => "0912345678",
+              "organization"             => "org",
+              "status"                   => "Approved",
+              "approved_at"              => String,
+              "created_at"               => String,
+              "updated_at"               => String,
+            },
+            "event" => {
+              "id"                => 1,
+              "name"              => "name",
+              "english_name"      => nil,
+              "organizer"         => "organizer",
+              "english_organizer" => nil,
+              "location"          => "somewhere",
+              "english_location"  => nil,
+              "level"             => "Full",
+              "region"            => "Central",
+              "url"               => nil,
+              "start_at"          => String,
+              "sign_start_at"     => nil,
+              "sign_end_at"       => nil,
+              "iaaf"              => true,
+              "aims"              => false,
+              "measured"          => false,
+              "recordable"        => true,
+              "created_at"        => String,
+              "updated_at"        => String,
+            },
+            "distance" => {
+              "id"           => 1,
+              "name"         => "name",
+              "distance"     => nil,
+              "cost"         => nil,
+              "time_limit"   => nil,
+              "runner_limit" => nil,
+              "created_at"   => String,
+              "updated_at"   => String,
+            },
+            "bib_number" => "1234",
+            "group"      => nil,
+            "time"       => 5678,
+            "chip_time"  => nil,
+            "rank"       => nil,
+            "group_rank" => nil,
+            "remark"     => nil,
+            "status"     => "Approved",
+            "approver"   => {
+              "id"         => 1,
+              "fb_id"      => "manager",
+              "name"       => "Manager",
+              "email"      => "manager@bar.com",
+              "position"   => "Manager",
+              "created_at" => String,
+              "updated_at" => String,
+            },
+            "approved_at" => String,
+            "updated_at"  => String,
+            "created_at"  => String,
+          }])
+        end
+      end
+    end
+  end
+
   describe "#show" do
     context "not log in" do
       it "gets an approved record" do
