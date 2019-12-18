@@ -65,6 +65,8 @@ describe EventController do
 
   describe "#create" do
     it "creates an event" do
+      time = Time.local
+
       with_manager do
         post "/events", HTTP::Headers{"Authorization" => "Bearer manager_token"}, form: {
           "name"              => "this name",
@@ -76,9 +78,9 @@ describe EventController do
           "level"             => "triathlon",
           "region"            => "others",
           "url"               => "https://example.org",
-          "start_at"          => (Time.local + 30.days).to_s("%F %T"),
-          "sign_start_at"     => (Time.local + 10.days).to_s("%F %T"),
-          "sign_end_at"       => (Time.local + 20.days).to_s("%F %T"),
+          "start_at"          => (time + 30.days).to_s("%F %T %:z"),
+          "sign_start_at"     => (time + 10.days).to_s("%F %T %:z"),
+          "sign_end_at"       => (time + 20.days).to_s("%F %T %:z"),
           "iaaf"              => "false",
           "aims"              => "true",
           "measured"          => "true",
@@ -97,9 +99,9 @@ describe EventController do
           "level"             => "Triathlon",
           "region"            => "Others",
           "url"               => "https://example.org",
-          "start_at"          => String,
-          "sign_start_at"     => String,
-          "sign_end_at"       => String,
+          "start_at"          => (time + 30.days).to_s("%F %T %:z"),
+          "sign_start_at"     => (time + 10.days).to_s("%F %T %:z"),
+          "sign_end_at"       => (time + 20.days).to_s("%F %T %:z"),
           "iaaf"              => false,
           "aims"              => true,
           "measured"          => true,
@@ -113,6 +115,8 @@ describe EventController do
 
   describe "#update" do
     it "updates an event" do
+      time = Time.local
+
       with_event do
         with_manager do
           patch "/events/1", HTTP::Headers{"Authorization" => "Bearer manager_token"}, form: {
@@ -125,9 +129,9 @@ describe EventController do
             "level"             => "triathlon",
             "region"            => "others",
             "url"               => "https://example.org",
-            "start_at"          => (Time.local + 30.days).to_s("%F %T"),
-            "sign_start_at"     => (Time.local + 10.days).to_s("%F %T"),
-            "sign_end_at"       => (Time.local + 20.days).to_s("%F %T"),
+            "start_at"          => (time + 30.days).to_s("%F %T %:z"),
+            "sign_start_at"     => (time + 10.days).to_s("%F %T %:z"),
+            "sign_end_at"       => (time + 20.days).to_s("%F %T %:z"),
             "iaaf"              => "false",
             "aims"              => "true",
             "measured"          => "true",
@@ -146,9 +150,9 @@ describe EventController do
             "level"             => "Triathlon",
             "region"            => "Others",
             "url"               => "https://example.org",
-            "start_at"          => String,
-            "sign_start_at"     => String,
-            "sign_end_at"       => String,
+            "start_at"          => (time + 30.days).to_s("%F %T %:z"),
+            "sign_start_at"     => (time + 10.days).to_s("%F %T %:z"),
+            "sign_end_at"       => (time + 20.days).to_s("%F %T %:z"),
             "iaaf"              => false,
             "aims"              => true,
             "measured"          => true,
