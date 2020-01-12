@@ -261,9 +261,7 @@ describe RunnerController do
         runner.approver_id.should eq(1)
         runner.approved_at.should be_nil
 
-        error = runner.error!
-
-        error.description.should eq("reason")
+        runner.error!.description.should eq("reason")
       end
     end
   end

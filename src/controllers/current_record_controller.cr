@@ -49,7 +49,7 @@ class CurrentRecordController < ApplicationController
   end
 
   private def set_runner
-    not_found! t("errors.current_runner.not_found") unless @runner = Runner.find_by(user_id: current_user.id)
+    not_found! t("errors.current_runner.not_found") unless @runner = current_user.runner?
   end
 
   private def set_record

@@ -22,8 +22,8 @@ class RunnerController < ApplicationController
   end
 
   def user_show
-    not_found! t("errors.user.runner.not_found") unless user.runner
-    RunnerRenderer.render user.runner!, user?: false, approver?: true
+    not_found! t("errors.user.runner.not_found") unless user.runner?
+    RunnerRenderer.render user.runner, user?: false, approver?: true
   end
 
   def update_status

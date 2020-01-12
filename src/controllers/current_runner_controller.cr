@@ -14,7 +14,7 @@ class CurrentRunnerController < ApplicationController
   end
 
   def create
-    return bad_request! t("errors.runner.create") if Runner.find_by(user_id: current_user.id)
+    return bad_request! t("errors.runner.create") if current_user.runner?
 
     @runner = Runner.new(params.select(CREATE_PARAMS))
     runner.set_other_attributes(user: current_user, birthday: params["birthday"]?)
@@ -48,6 +48,6 @@ class CurrentRunnerController < ApplicationController
   end
 
   private def set_runner
-    not_found! t("errors.current_runner.not_found") unless @runner = Runner.find_by(user_id: current_user.id)
+    not_found! t("errors.current_runner.not_found") unless @runner = current_user.runner?
   end
 end

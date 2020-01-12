@@ -2,7 +2,7 @@ version: 1.0
 shards:
   amber:
     github: amberframework/amber
-    version: 0.30.1
+    version: 0.31.0
 
   amber_router:
     github: amberframework/amber-router
@@ -10,7 +10,7 @@ shards:
 
   ameba:
     github: crystal-ameba/ameba
-    version: 0.10.1
+    version: 0.11.0
 
   callback:
     github: drujensen/callback
@@ -34,15 +34,15 @@ shards:
 
   db:
     github: crystal-lang/crystal-db
-    version: 0.6.0
+    version: 0.7.0
 
   exception_page:
     github: crystal-loot/exception_page
     version: 0.1.2
 
   granite:
-    github: amberframework/granite
-    version: 0.17.2
+    github: c910335/granite
+    commit: 62cd978a2bf39d5937a32ba9b871d6239a22351a
 
   i18n:
     github: TechMagister/i18n.cr
@@ -66,11 +66,11 @@ shards:
 
   micrate:
     github: amberframework/micrate
-    version: 0.3.5
+    version: 0.4.1
 
   mysql:
     github: crystal-lang/crystal-mysql
-    version: 0.8.0
+    version: 0.9.0
 
   optarg:
     github: drujensen/optarg
@@ -78,7 +78,7 @@ shards:
 
   pg:
     github: will/crystal-pg
-    version: 0.18.1
+    version: 0.19.0
 
   pool:
     github: ysbaddaden/pool
@@ -102,7 +102,7 @@ shards:
 
   sqlite3:
     github: crystal-lang/crystal-sqlite3
-    version: 0.13.0
+    version: 0.14.0
 
   string_inflection:
     github: mosop/string_inflection

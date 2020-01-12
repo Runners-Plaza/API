@@ -12,8 +12,8 @@ class Runner < Granite::Base
 
   belongs_to approver : User
   belongs_to user : User
-  has_one error : RunnerError
-  has_many records
+  has_one error : RunnerError?
+  has_many records, class_name: Record
 
   column id : Int64, primary: true
   column name : String?
