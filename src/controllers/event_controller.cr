@@ -40,7 +40,7 @@ class EventController < ApplicationController
 
   def destroy
     event.destroy
-    EventRenderer.render event
+    DetailedEventRenderer.render event
   end
 
   private def set_event
