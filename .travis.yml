@@ -1,6 +1,7 @@
 language: crystal
 
 services:
+  - docker
   - postgresql
 
 before_script:
@@ -10,3 +11,4 @@ script:
   - crystal tool format --check
   - bin/ameba
   - crystal spec
+  - docker-compose build
