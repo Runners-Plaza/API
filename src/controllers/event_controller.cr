@@ -11,18 +11,18 @@ class EventController < ApplicationController
   end
 
   def index
-    EventRenderer.render paginate Event
+    DetailedEventRenderer.render paginate Event
   end
 
   def show
-    EventRenderer.render event
+    DetailedEventRenderer.render event
   end
 
   def create
     @event = Event.new(params.select(PARAMS))
     event.set_other_attributes(params.select(OTHER_PARAMS))
     if event.save
-      EventRenderer.render event
+      DetailedEventRenderer.render event
     else
       bad_request! t("errors.event.create")
     end
@@ -32,7 +32,7 @@ class EventController < ApplicationController
     event.set_attributes(params.select(PARAMS))
     event.set_other_attributes(params.select(OTHER_PARAMS))
     if event.save
-      EventRenderer.render event
+      DetailedEventRenderer.render event
     else
       bad_request! t("errors.event.update")
     end
@@ -40,7 +40,7 @@ class EventController < ApplicationController
 
   def destroy
     event.destroy
-    EventRenderer.render event
+    DetailedEventRenderer.render event
   end
 
   private def set_event

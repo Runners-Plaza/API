@@ -23,7 +23,7 @@ class Event < Granite::Base
 
   before_destroy clear_distances
 
-  has_many distances : Distance
+  has_many distances, class_name: Distance
 
   column id : Int64, primary: true
   column name : String

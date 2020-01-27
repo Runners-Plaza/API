@@ -13,8 +13,8 @@ class Record < Granite::Base
   belongs_to runner
   belongs_to distance
   belongs_to approver : User
-  has_one error : RecordError
-  has_one certificate : Certificate
+  has_one error : RecordError?
+  has_one certificate : Certificate?
 
   column id : Int64, primary: true
   column bib_number : String

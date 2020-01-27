@@ -18,11 +18,13 @@ targets:
 dependencies:
   amber:
     github: amberframework/amber
-    version: ~> 0.30.1
+    version: ~> 0.31.0
 
   granite:
-    github: amberframework/granite
-    version: ~> 0.17.2
+    github: c910335/granite
+    branch: association-improvements
+    # github: amberframework/granite
+    # version: ~> 0.17.2
 
   crinder:
     github: c910335/crinder
@@ -39,7 +41,7 @@ dependencies:
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 0.10.1
+    version: ~> 0.11.0
 
   mass_spec:
     github: c910335/mass-spec
