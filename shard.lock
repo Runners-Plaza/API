@@ -2,7 +2,7 @@ version: 1.0
 shards:
   amber:
     github: amberframework/amber
-    version: 0.31.0
+    version: 0.32.0
 
   amber_router:
     github: amberframework/amber-router
@@ -34,7 +34,7 @@ shards:
 
   db:
     github: crystal-lang/crystal-db
-    version: 0.7.0
+    version: 0.8.0
 
   exception_page:
     github: crystal-loot/exception_page
@@ -42,7 +42,7 @@ shards:
 
   granite:
     github: c910335/granite
-    commit: 62cd978a2bf39d5937a32ba9b871d6239a22351a
+    commit: eaf1834dfcab49cbe398e9e3de06c7f712674cc5
 
   i18n:
     github: TechMagister/i18n.cr
@@ -66,11 +66,11 @@ shards:
 
   micrate:
     github: amberframework/micrate
-    version: 0.4.1
+    version: 0.5.0
 
   mysql:
     github: crystal-lang/crystal-mysql
-    version: 0.9.0
+    version: 0.10.0
 
   optarg:
     github: drujensen/optarg
@@ -78,7 +78,7 @@ shards:
 
   pg:
     github: will/crystal-pg
-    version: 0.19.0
+    version: 0.20.0
 
   pool:
     github: ysbaddaden/pool
@@ -90,7 +90,7 @@ shards:
 
   shale:
     github: c910335/shale
-    version: 0.2.1
+    version: 0.2.2
 
   shell-table:
     github: luckyframework/shell-table.cr
@@ -102,7 +102,7 @@ shards:
 
   sqlite3:
     github: crystal-lang/crystal-sqlite3
-    version: 0.14.0
+    version: 0.15.0
 
   string_inflection:
     github: mosop/string_inflection
