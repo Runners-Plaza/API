@@ -12,7 +12,7 @@ class DistanceController < ApplicationController
   end
 
   def index
-    DistanceRenderer.render paginate Distance.where(event_id: event.id)
+    DistanceRenderer.render Distance.where(event_id: event.id).select
   end
 
   def show
