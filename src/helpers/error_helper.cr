@@ -39,7 +39,7 @@ module ErrorHelper
   end
 
   def auth_header(realm : String, type : Symbol, description : String)
-    %(Bearer realm="#{realm}", error="#{type.to_s}, error_description="#{description}")
+    %(Bearer realm="#{realm}", error="#{type}, error_description="#{description}")
   end
 
   def error!(type : Symbol, description : String)
