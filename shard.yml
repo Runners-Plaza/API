@@ -32,7 +32,7 @@ dependencies:
 
   shale:
     github: c910335/shale
-    version: ~> 0.2.2
+    version: ~> 0.2.3
 
   citrine-i18n:
     github: amberframework/citrine-i18n
