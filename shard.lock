@@ -2,7 +2,7 @@ version: 1.0
 shards:
   amber:
     github: amberframework/amber
-    version: 0.33.0
+    version: 0.34.0
 
   amber_router:
     github: amberframework/amber-router
@@ -10,7 +10,7 @@ shards:
 
   ameba:
     github: crystal-ameba/ameba
-    version: 0.12.0
+    version: 0.12.1
 
   callback:
     github: drujensen/callback
@@ -34,7 +34,7 @@ shards:
 
   db:
     github: crystal-lang/crystal-db
-    version: 0.8.0
+    version: 0.9.0
 
   exception_page:
     github: crystal-loot/exception_page
@@ -42,7 +42,7 @@ shards:
 
   granite:
     github: c910335/granite
-    commit: 55dd99923effca0f570ead0547ae8b01113d1a8e
+    commit: e961a574c4c59669103e66f4f8dd1f2e65076b4c
 
   i18n:
     github: TechMagister/i18n.cr
@@ -54,7 +54,7 @@ shards:
 
   kilt:
     github: jeromegn/kilt
-    version: 0.4.0
+    version: 0.6.0
 
   liquid:
     github: TechMagister/liquid.cr
@@ -66,11 +66,11 @@ shards:
 
   micrate:
     github: amberframework/micrate
-    version: 0.6.1
+    version: 0.7.0
 
   mysql:
     github: crystal-lang/crystal-mysql
-    version: 0.10.0
+    version: 0.11.0
 
   optarg:
     github: drujensen/optarg
@@ -78,7 +78,7 @@ shards:
 
   pg:
     github: will/crystal-pg
-    version: 0.20.0
+    version: 0.21.0
 
   pool:
     github: ysbaddaden/pool
@@ -86,11 +86,11 @@ shards:
 
   redis:
     github: stefanwille/crystal-redis
-    version: 2.5.3
+    version: 2.6.0
 
   shale:
     github: c910335/shale
-    version: 0.2.3
+    version: 0.2.4
 
   shell-table:
     github: luckyframework/shell-table.cr
@@ -102,7 +102,7 @@ shards:
 
   sqlite3:
     github: crystal-lang/crystal-sqlite3
-    version: 0.15.0
+    version: 0.16.0
 
   string_inflection:
     github: mosop/string_inflection
@@ -110,7 +110,7 @@ shards:
 
   teeplate:
     github: mosop/teeplate
-    version: 0.8.0
+    version: 0.9.0
 
   webmock:
     github: manastech/webmock.cr
