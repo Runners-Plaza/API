@@ -35,6 +35,7 @@ class Event < Granite::Base
   enum_column level : Level
   enum_column region : Region
   column url : String?
+  column status : String?
   column start_at : Time
   column sign_start_at : Time?
   column sign_end_at : Time?

@@ -9,6 +9,7 @@ class EventRenderer < Crinder::Base(Event)
   field level : String
   field region : String
   field url : String?
+  field status : String?
   field start_at : String
   field sign_start_at : String?
   field sign_end_at : String?

@@ -1,5 +1,5 @@
 class EventController < ApplicationController
-  PARAMS       = %w(name english_name organizer english_organizer location english_location url iaaf aims measured recordable)
+  PARAMS       = %w(name english_name organizer english_organizer location english_location url status iaaf aims measured recordable)
   OTHER_PARAMS = %w(level region start_at sign_start_at sign_end_at)
 
   property! event : Event
