@@ -4,7 +4,7 @@ version: 0.1.0
 authors:
   - Tatsiujin Chin <c910335@gmail.com>
 
-crystal: 0.33.0
+crystal: 0.34.0
 
 license: MIT License
 
@@ -18,13 +18,13 @@ targets:
 dependencies:
   amber:
     github: amberframework/amber
-    version: ~> 0.33.0
+    version: ~> 0.34.0
 
   granite:
     github: c910335/granite
     branch: association-improvements
     # github: amberframework/granite
-    # version: ~> 0.17.2
+    # version: ~> 0.20.0
 
   crinder:
     github: c910335/crinder
@@ -32,7 +32,7 @@ dependencies:
 
   shale:
     github: c910335/shale
-    version: ~> 0.2.3
+    version: ~> 0.2.4
 
   citrine-i18n:
     github: amberframework/citrine-i18n
@@ -41,7 +41,7 @@ dependencies:
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 0.12.0
+    version: ~> 0.12.1
 
   mass_spec:
     github: c910335/mass-spec

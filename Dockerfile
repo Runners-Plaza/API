@@ -1,4 +1,4 @@
-FROM amberframework/amber:0.33.0
+FROM amberframework/amber:0.34.0
 
 WORKDIR /app
 
