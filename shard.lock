@@ -30,7 +30,7 @@ shards:
 
   crinder:
     github: c910335/crinder
-    version: 0.2.0
+    version: 0.3.0
 
   db:
     github: crystal-lang/crystal-db
@@ -62,7 +62,7 @@ shards:
 
   mass_spec:
     github: c910335/mass-spec
-    version: 0.3.1
+    version: 0.3.2
 
   micrate:
     github: amberframework/micrate

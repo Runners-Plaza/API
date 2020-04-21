@@ -10,20 +10,13 @@ class Event < Granite::Base
     Ultra
   end
 
-  enum Region
-    Northern
-    Central
-    Southern
-    Eastern
-    Others
-  end
-
   connection pg
   table events
 
   before_destroy clear_distances
 
   has_many distances, class_name: Distance
+  belongs_to region
 
   column id : Int64, primary: true
   column name : String
@@ -33,7 +26,6 @@ class Event < Granite::Base
   column location : String
   column english_location : String?
   enum_column level : Level
-  enum_column region : Region
   column url : String?
   column status : String?
   column start_at : Time
@@ -47,7 +39,6 @@ class Event < Granite::Base
 
   def set_other_attributes(args)
     self.level = args["level"] if args["level"]?
-    self.region = args["region"] if args["region"]?
     @start_at = Time.parse(args["start_at"], "%F %T %:z", Granite.settings.default_timezone) if args["start_at"]?
     @sign_start_at = Time.parse(args["sign_start_at"], "%F %T %:z", Granite.settings.default_timezone) if args["sign_start_at"]?
     @sign_end_at = Time.parse(args["sign_end_at"], "%F %T %:z", Granite.settings.default_timezone) if args["sign_end_at"]?

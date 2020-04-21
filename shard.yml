@@ -28,7 +28,7 @@ dependencies:
 
   crinder:
     github: c910335/crinder
-    version: ~> 0.2.0
+    version: ~> 0.3.0
 
   shale:
     github: c910335/shale
@@ -45,7 +45,7 @@ development_dependencies:
 
   mass_spec:
     github: c910335/mass-spec
-    version: ~> 0.3.1
+    version: ~> 0.3.2
 
   webmock:
     github: manastech/webmock.cr
