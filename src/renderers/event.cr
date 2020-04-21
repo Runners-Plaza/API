@@ -7,8 +7,9 @@ class EventRenderer < Crinder::Base(Event)
   field location : String
   field english_location : String?
   field level : String
-  field region : String
   field url : String?
+  field status : String?
+  field region : Region, with: RegionRenderer
   field start_at : String
   field sign_start_at : String?
   field sign_end_at : String?

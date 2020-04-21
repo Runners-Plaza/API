@@ -6,6 +6,7 @@ describe EventController do
       with_distance do
         get "/events"
 
+        pp! body
         status_code.should eq(200)
         json_body.should match([{
           "id"                => 1,
@@ -25,9 +26,14 @@ describe EventController do
             "created_at"   => String,
             "updated_at"   => String,
           }],
-          "level"         => "Full",
-          "region"        => "Central",
-          "url"           => nil,
+          "level"  => "Full",
+          "url"    => nil,
+          "status" => nil,
+          "region" => {
+            "id"           => 1,
+            "name"         => "test region name",
+            "english_name" => "test region english name",
+          },
           "start_at"      => String,
           "sign_start_at" => nil,
           "sign_end_at"   => nil,
@@ -66,9 +72,14 @@ describe EventController do
             "created_at"   => String,
             "updated_at"   => String,
           }],
-          "level"         => "Full",
-          "region"        => "Central",
-          "url"           => nil,
+          "level"  => "Full",
+          "url"    => nil,
+          "status" => nil,
+          "region" => {
+            "id"           => 1,
+            "name"         => "test region name",
+            "english_name" => "test region english name",
+          },
           "start_at"      => String,
           "sign_start_at" => nil,
           "sign_end_at"   => nil,
@@ -88,48 +99,56 @@ describe EventController do
       time = Time.local
 
       with_manager do
-        post "/events", HTTP::Headers{"Authorization" => "Bearer manager_token"}, form: {
-          "name"              => "this name",
-          "english_name"      => "another name",
-          "organizer"         => "org...",
-          "english_organizer" => "organizer",
-          "location"          => "here",
-          "english_location"  => "there",
-          "level"             => "triathlon",
-          "region"            => "others",
-          "url"               => "https://example.org",
-          "start_at"          => (time + 30.days).to_s("%F %T %:z"),
-          "sign_start_at"     => (time + 10.days).to_s("%F %T %:z"),
-          "sign_end_at"       => (time + 20.days).to_s("%F %T %:z"),
-          "iaaf"              => "false",
-          "aims"              => "true",
-          "measured"          => "true",
-          "recordable"        => "false",
-        }
+        with_region do
+          post "/events", HTTP::Headers{"Authorization" => "Bearer manager_token"}, form: {
+            "name"              => "this name",
+            "english_name"      => "another name",
+            "organizer"         => "org...",
+            "english_organizer" => "organizer",
+            "location"          => "here",
+            "english_location"  => "there",
+            "level"             => "triathlon",
+            "region_id"         => "1",
+            "url"               => "https://example.org",
+            "status"            => "on fire",
+            "start_at"          => (time + 30.days).to_s("%F %T %:z"),
+            "sign_start_at"     => (time + 10.days).to_s("%F %T %:z"),
+            "sign_end_at"       => (time + 20.days).to_s("%F %T %:z"),
+            "iaaf"              => "false",
+            "aims"              => "true",
+            "measured"          => "true",
+            "recordable"        => "false",
+          }
 
-        status_code.should eq(200)
-        json_body.should match({
-          "id"                => 1,
-          "name"              => "this name",
-          "english_name"      => "another name",
-          "organizer"         => "org...",
-          "english_organizer" => "organizer",
-          "location"          => "here",
-          "english_location"  => "there",
-          "distances"         => [] of JSON::Any,
-          "level"             => "Triathlon",
-          "region"            => "Others",
-          "url"               => "https://example.org",
-          "start_at"          => (time + 30.days).to_s("%F %T %:z"),
-          "sign_start_at"     => (time + 10.days).to_s("%F %T %:z"),
-          "sign_end_at"       => (time + 20.days).to_s("%F %T %:z"),
-          "iaaf"              => false,
-          "aims"              => true,
-          "measured"          => true,
-          "recordable"        => false,
-          "created_at"        => String,
-          "updated_at"        => String,
-        })
+          status_code.should eq(200)
+          json_body.should match({
+            "id"                => 1,
+            "name"              => "this name",
+            "english_name"      => "another name",
+            "organizer"         => "org...",
+            "english_organizer" => "organizer",
+            "location"          => "here",
+            "english_location"  => "there",
+            "distances"         => [] of JSON::Any,
+            "level"             => "Triathlon",
+            "url"               => "https://example.org",
+            "status"            => "on fire",
+            "region"            => {
+              "id"           => 1,
+              "name"         => "test region name",
+              "english_name" => "test region english name",
+            },
+            "start_at"      => (time + 30.days).to_s("%F %T %:z"),
+            "sign_start_at" => (time + 10.days).to_s("%F %T %:z"),
+            "sign_end_at"   => (time + 20.days).to_s("%F %T %:z"),
+            "iaaf"          => false,
+            "aims"          => true,
+            "measured"      => true,
+            "recordable"    => false,
+            "created_at"    => String,
+            "updated_at"    => String,
+          })
+        end
       end
     end
   end
@@ -148,8 +167,9 @@ describe EventController do
             "location"          => "here",
             "english_location"  => "there",
             "level"             => "triathlon",
-            "region"            => "others",
             "url"               => "https://example.org",
+            "status"            => "on fire",
+            "region_id"         => "1",
             "start_at"          => (time + 30.days).to_s("%F %T %:z"),
             "sign_start_at"     => (time + 10.days).to_s("%F %T %:z"),
             "sign_end_at"       => (time + 20.days).to_s("%F %T %:z"),
@@ -178,9 +198,14 @@ describe EventController do
               "created_at"   => String,
               "updated_at"   => String,
             }],
-            "level"         => "Triathlon",
-            "region"        => "Others",
-            "url"           => "https://example.org",
+            "level"  => "Triathlon",
+            "url"    => "https://example.org",
+            "status" => "on fire",
+            "region" => {
+              "id"           => 1,
+              "name"         => "test region name",
+              "english_name" => "test region english name",
+            },
             "start_at"      => (time + 30.days).to_s("%F %T %:z"),
             "sign_start_at" => (time + 10.days).to_s("%F %T %:z"),
             "sign_end_at"   => (time + 20.days).to_s("%F %T %:z"),
@@ -221,9 +246,14 @@ describe EventController do
               "created_at"   => String,
               "updated_at"   => String,
             }],
-            "level"         => "Full",
-            "region"        => "Central",
-            "url"           => nil,
+            "level"  => "Full",
+            "url"    => nil,
+            "status" => nil,
+            "region" => {
+              "id"           => 1,
+              "name"         => "test region name",
+              "english_name" => "test region english name",
+            },
             "start_at"      => String,
             "sign_start_at" => nil,
             "sign_end_at"   => nil,

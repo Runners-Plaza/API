@@ -9,7 +9,7 @@ class RunnerRenderer < Crinder::Base(Runner)
   field phone : String
   field organization : String?
   field status : String
-  field approver, with: UserRenderer, value: ->{ object.approver_id.try { approver } }, if: approver?
+  field approver, with: UserRenderer, options: {fb_id?: true}, value: ->{ object.approver_id.try { approver } }, if: approver?
   field approved_at : String?
   field created_at : String
   field updated_at : String

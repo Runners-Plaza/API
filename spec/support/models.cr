@@ -96,21 +96,33 @@ def with_rejected_runner
   end
 end
 
-def with_event
-  clear Event do
-    Event.create(
-      name: "name",
-      organizer: "organizer",
-      location: "somewhere",
-      level_number: 6,
-      region_number: 1,
-      start_at: Time.local + 1.month,
-      iaaf: true,
-      aims: false,
-      measured: false,
-      recordable: true
+def with_region
+  clear Region do
+    Region.create(
+      name: "test region name",
+      english_name: "test region english name"
     )
     yield
+  end
+end
+
+def with_event
+  with_region do
+    clear Event do
+      Event.create(
+        name: "name",
+        organizer: "organizer",
+        location: "somewhere",
+        level_number: 6,
+        region_id: 1_i64,
+        start_at: Time.local + 1.month,
+        iaaf: true,
+        aims: false,
+        measured: false,
+        recordable: true
+      )
+      yield
+    end
   end
 end
 
